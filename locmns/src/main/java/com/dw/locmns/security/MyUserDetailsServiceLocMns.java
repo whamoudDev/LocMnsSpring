@@ -20,23 +20,12 @@ public class MyUserDetailsServiceLocMns implements UserDetailsService {
     UtilisateurDao utilisateurDao;
 
     @Autowired
+    private GestionnaireDao gestionnaireDao;
+
+    @Autowired
     MyUserDetailsServiceLocMns(UtilisateurDao utilisateurDao){
         this.utilisateurDao = utilisateurDao;
     }
-
-   /* @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Optional<Utilisateur> optional = utilisateurDao.findBymailUtilisateur(email);
-        if (optional.isEmpty()){
-            throw new UsernameNotFoundException("L'utilisateur n'existe pas");
-
-
-        }
-        return new MyUserDetails((optional.get()));
-    }
-
-
-*/
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -44,11 +33,17 @@ public class MyUserDetailsServiceLocMns implements UserDetailsService {
         if (optional.isEmpty()){
             throw new UsernameNotFoundException("L'utilisateur n'existe pas");
 
-
         }
         return new MyUserDetails((optional.get()));
     }
 
 
+
 }
 
+   /* Utilisateur utilisateur = utilisateurDao.findBymailUtilisateur(String mailUtilisateur).orElseThrow(() -> new UsernameNotFoundException("Mauvais mail / mot de passe"));
+
+    Optional<Gestionnaire> gestionnaire  = gestionnaireDao.findById(utilisateur.getIdUtilisateur());
+
+    MyUserDetails myUserDetails = new myUserDetails(utilisateur, gestionnaire.isPresent() );
+        return myUserDetails;*/

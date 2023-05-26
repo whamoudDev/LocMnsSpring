@@ -14,10 +14,11 @@ import java.util.List;
 import java.util.Objects;
 
 public class MyUserDetails  implements UserDetails {
+    private Utilisateur utilisateur;
 
-    public MyUserDetails(Utilisateur utilisateur) {
+
+    public MyUserDetails(Utilisateur utilisateur)  {
         this.utilisateur =utilisateur;
-
 
     }
 
@@ -25,16 +26,28 @@ public class MyUserDetails  implements UserDetails {
         return utilisateur;
     }
 
-    private Utilisateur utilisateur;
 
 
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
 
-        return List.of(new SimpleGrantedAuthority(utilisateur.getMailUtilisateur()));
+        return List.of(new SimpleGrantedAuthority(utilisateur.getTypeUtilisateur().getRoleUtilisateur()));
 
+
+        /*ArrayList<SimpleGrantedAuthority> listeAuthority = new ArrayList<>();
+
+        if(isGestionnaire) {
+            listeAuthority.add(new SimpleGrantedAuthority("ROLE_GESTIONNAIRE"));
+        }else{
+            listeAuthority.add(new SimpleGrantedAuthority("ROLE_UTILISATEUR"));
+        }
+
+        return listeAuthority;*/
     }
+
+
+
 
 
    /* public boolean isSuperAdmin() {
