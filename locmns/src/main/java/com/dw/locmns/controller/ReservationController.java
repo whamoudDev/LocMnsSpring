@@ -39,6 +39,13 @@ public class ReservationController {
     }
 
 
+//    @PostMapping("/demandeReservation")
+//    @JsonView(vueReservation.class)
+//    public String demandeReservation(@RequestBody Reservation reservationAenregistrer) {
+//        reservationDao.save(reservationAenregistrer);
+//       // return reservationAenregistrer;
+//         return "demande ajouté";
+//    }
 
     @PostMapping("/demandeReservation")
     @JsonView(vueReservation.class)
@@ -66,15 +73,8 @@ public class ReservationController {
     }
 
 
-/*
-    @PostMapping("/demandeReservation")
-    @JsonView(vueReservation.class)
-    public String demandeReservation(@RequestBody Reservation reservationAenregistrer) {
-        reservationDao.save(reservationAenregistrer);
-       // return reservationAenregistrer;
-         return "demande ajouté";
-    }
-*/
+
+
 
 
 

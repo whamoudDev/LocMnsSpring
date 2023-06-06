@@ -27,6 +27,7 @@ public class Location {
     private String descriptionLocation;
     @JsonView({vueUtilisateur.class, vueLocation.class})
     private String numSerieLocation;
+
     @ManyToOne
     @JsonView(vueUtilisateur.class)
     //@JoinColumn(name="id_localisation")
