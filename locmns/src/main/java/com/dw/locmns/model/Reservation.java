@@ -2,6 +2,7 @@ package com.dw.locmns.model;
 
 
 import com.dw.locmns.view.vueAlerte;
+import com.dw.locmns.view.vueLocation;
 import com.dw.locmns.view.vueReservation;
 import com.dw.locmns.view.vueUtilisateur;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -22,16 +23,16 @@ import java.util.Set;
 @Entity
 public class Reservation {
 
-    @JsonView(vueUtilisateur.class)
+    @JsonView({vueUtilisateur.class, vueReservation.class})
     @GeneratedValue(strategy = GenerationType.IDENTITY )
     @Id
     private Integer idReservation;
 
-    @JsonView(vueUtilisateur.class)
+    @JsonView(vueReservation.class)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime dateDebutReservation;
 
-    @JsonView(vueUtilisateur.class)
+    @JsonView(vueReservation.class)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime dateFinPrevu;
 
@@ -40,7 +41,8 @@ public class Reservation {
     @JsonView(vueReservation.class)
     private String cadreUtilisation;
 
-    @JsonView(vueUtilisateur.class)
+    @JsonView(vueReservation.class)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime dateRetourReel;
 
 

@@ -53,15 +53,15 @@ public class ConfigurationSecurite extends WebSecurityConfigurerAdapter {
 
         http
                 .cors().and()
-                .csrf().disable()
-                .authorizeRequests()
-                .antMatchers("/type-utilisateurs", "/connexion", "/liste-localisations").permitAll()
+                .csrf().disable();
+               /* .authorizeRequests()
+                .antMatchers("/type-utilisateurs", "/connexion", "/liste-localisations", "/liste-locations","/liste-locations/{idLocation}", "/liste-typeLocations","/liste-cadres-utilisation","/liste-reservations","/liste-reservations/{idReservation}").permitAll()
                 .antMatchers("/**").hasAnyRole("UTILISATEUR", "GESTIONNAIRE", "SUPERADMIN")
 
                 .and().exceptionHandling()
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-        http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);*/
 
 
     }

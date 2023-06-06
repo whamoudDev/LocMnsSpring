@@ -21,8 +21,5 @@ public class Photo {
    /* @OneToMany(mappedBy = "Location")
     private Set<Photo> listeLocation= new HashSet<>();
 */
-   @ManyToOne
-   @JoinColumn(name = "idLocation")
-   private Location location;
 
 }
