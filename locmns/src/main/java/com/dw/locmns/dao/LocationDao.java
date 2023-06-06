@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -32,5 +33,13 @@ public interface LocationDao extends JpaRepository<Location, Integer> {
 */
 
     List<Location> findAllByEtatLocation(String etatLocation);
+
+
+    //Récupére l'id et numéro de série des locations en cours de réservation de l'utilisateur
+    @Query("SELECT l.idLocation, l.numSerieLocation FROM Location l JOIN l.utilisateur u JOIN l.reservations r WHERE u.idUtilisateur = :utilisateurId AND r.dateFinPrevu > current_date")
+    List<Location> listeLocationUtilisateur(@Param("utilisateurId") Integer id);
+
+
+
 
 }

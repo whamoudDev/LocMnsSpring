@@ -36,11 +36,16 @@ public class Location {
     @JsonView(vueUtilisateur.class)
     private TypeLocation typeLocation;
 
+    @OneToMany(mappedBy = "location")
+    @JsonView(vueUtilisateur.class)
+    private Set<Reservation> reservations = new HashSet<>();
+
     @ManyToOne
     //@JsonView({vueUtilisateur.class, vueLocation.class})
     private Utilisateur utilisateur;
-
-
+    @JsonView({vueUtilisateur.class, vueLocation.class})
+    @OneToMany
+    private Set<Photo> listePhotos= new HashSet<>();
 
 
 
