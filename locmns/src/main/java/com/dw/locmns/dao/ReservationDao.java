@@ -37,5 +37,9 @@ public interface ReservationDao extends JpaRepository<Reservation, Integer> {
    /*@Query("SELECT count(r) FROM Reservation r WHERE r.dateDebutReservation is not null")
    Integer RechercherNombreDemandesReservation();*/
 
+   @Query("SELECT R FROM Reservation R WHERE R.dateFinPrevu < CURRENT_TIMESTAMP AND R.dateRetourReel IS NULL")
+   List<Reservation> listeReservationNonRendu();
 
+   @Query("SELECT R FROM Reservation R WHERE R.dateRetourReel IS NULL")
+   List<Reservation> listeReservationEnCours();
 }

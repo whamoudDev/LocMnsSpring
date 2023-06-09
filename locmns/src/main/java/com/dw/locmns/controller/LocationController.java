@@ -108,7 +108,12 @@ public class LocationController {
     }
 
 
+    @JsonView(vueLocation.class)
+    @GetMapping("/locationDisponible")
+    public List<Location> listeLocationDisponible(){
+        return this.locationDao.listeLocationDisponible();
 
+    }
 
 
     /*@GetMapping("/photoLocation/{idLocation}")

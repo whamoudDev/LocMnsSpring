@@ -31,6 +31,7 @@ public class ReservationController {
     private UtilisateurDao utilisateurDao;
 
 
+
     @Autowired
     public ReservationController(ReservationDao reservationDao, UtilisateurDao utilisateurDao, LocationDao locationDao) {
         this.reservationDao = reservationDao;
@@ -117,9 +118,17 @@ public class ReservationController {
     }
 
 
+    @GetMapping("/reservationNonRendu")
+    @JsonView(vueReservation.class)
+    public List<Reservation> listeReservationNonRendu(){
+        return  this.reservationDao.listeReservationNonRendu();
+    }
 
-
-
+    @GetMapping("/reservationEnCours")
+    @JsonView(vueReservation.class)
+    public List<Reservation> listeReservationEnCours(){
+        return  this.reservationDao.listeReservationEnCours();
+    }
 
 
 }

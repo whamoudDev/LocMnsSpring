@@ -1,6 +1,7 @@
 package com.dw.locmns.dao;
 
 import com.dw.locmns.model.Location;
+import com.dw.locmns.model.Reservation;
 import com.dw.locmns.model.Utilisateur;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -39,7 +40,8 @@ public interface LocationDao extends JpaRepository<Location, Integer> {
     @Query("SELECT l.idLocation, l.numSerieLocation FROM Location l JOIN l.utilisateur u JOIN l.reservations r WHERE u.idUtilisateur = :utilisateurId AND r.dateFinPrevu > current_date")
     List<Location> listeLocationUtilisateur(@Param("utilisateurId") Integer id);
 
-
+    @Query("SELECT L FROM Location L WHERE L.statutLocation='dispo' ")
+    List<Location> listeLocationDisponible();
 
 
 }
