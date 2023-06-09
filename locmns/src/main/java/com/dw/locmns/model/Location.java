@@ -30,12 +30,12 @@ public class Location {
     @JsonView({vueUtilisateur.class, vueLocation.class})
     private String statutLocation;
     @ManyToOne
-    @JsonView(vueUtilisateur.class)
+    @JsonView({vueUtilisateur.class})
     //@JoinColumn(name="id_localisation")
     private Localisation localisation;
 
     @ManyToOne
-    @JsonView(vueUtilisateur.class)
+    @JsonView({vueUtilisateur.class,vueLocation.class})
     private TypeLocation typeLocation;
 
     @OneToMany(mappedBy = "location")
