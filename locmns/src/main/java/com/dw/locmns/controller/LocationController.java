@@ -1,6 +1,5 @@
 package com.dw.locmns.controller;
 
-import com.dw.locmns.Services.FichierService;
 import com.dw.locmns.dao.LocationDao;
 import com.dw.locmns.dao.ReservationDao;
 import com.dw.locmns.dao.UtilisateurDao;
@@ -46,6 +45,8 @@ public class LocationController {
         this.utilisateurDao = utilisateurDao;
         this.reservationDao = reservationDao;
     }
+
+
 
 
     @JsonView(vueLocation.class)
@@ -98,10 +99,17 @@ public class LocationController {
     public List<Location> listeMaterielsDisponibles() {
         return this.locationDao.findAllByEtatLocation("hors d'usage");
     }
+    @JsonView(vueLocation.class)
+    @GetMapping("/locationDisponible")
+    public List<Location> listeLocationDisponible(){
+        return this.locationDao.listeLocationDisponible();
+
+    }
+
 
 
     @GetMapping("/photoLocation/{idLocation}")
-    public ResponseEntity<byte[]> getPhotoLocation(@PathVariable int idLocation) {
+    public ResponseEntity<byte[]> getPhotoLocation(@PathVariable int idLocation){
         Optional<Location> optional = locationDao.findById(idLocation);
         if (optional.isPresent()) {
             String nomImage = optional.get().getNomLocation();

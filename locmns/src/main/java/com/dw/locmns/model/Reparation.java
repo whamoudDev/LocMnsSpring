@@ -15,25 +15,25 @@ import java.util.Set;
 @Entity
 @Data
 public class Reparation {
-    @JsonView(vueUtilisateur.class)
+    @JsonView(vueReparation.class)
     @GeneratedValue(strategy = GenerationType.IDENTITY )
     @Id
     private Integer idReparation;
 
-    @JsonView(vueUtilisateur.class)
+    @JsonView(vueReparation.class)
     private  String nomReparation;
 
-    @JsonView(vueUtilisateur.class)
+    @JsonView(vueReparation.class)
     private  String descriptionPanne;
 
-    @JsonView(vueUtilisateur.class)
+    @JsonView(vueReparation.class)
     private LocalDateTime dateReception;
-    @JsonView(vueUtilisateur.class)
+    @JsonView(vueReparation.class)
     private LocalDateTime dateReparation;
-    @JsonView(vueUtilisateur.class)
+    @JsonView(vueReparation.class)
     private LocalDateTime dateRetourPrevisionnel;
-    @JsonView(vueUtilisateur.class)
-    private LocalDateTime dateRetour;
+    @JsonView(vueReparation.class)
+    private LocalDateTime dateRetourReel;
 
 
     /*@JsonView(vueAlerte.class)

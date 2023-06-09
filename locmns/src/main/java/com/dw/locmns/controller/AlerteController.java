@@ -36,17 +36,41 @@ public class AlerteController {
     }
 
 
+    @JsonView(vueAlerte.class)
+    @GetMapping("/alertesNonTraite")
+    public List<Alerte> listeAlertesNonTraite(){
+        return this.alerteDao.findAlertesNonTraite();
+    }
 
 
+    @JsonView(vueAlerte.class)
+    @GetMapping("/alertesReservationNonTraite")
+    public List<Alerte> listeAlertesReservationNonTraite(){
+        return this.alerteDao.findAlertesReservationNonTraite();
+    }
 
 
+    @JsonView(vueAlerte.class)
+    @GetMapping("/alertesReparationNonTraite")
+    public List<Alerte> listeAlertesReparationNonTraite(){
+        return this.alerteDao.findAlertesReparationNonTraite();
+    }
 
-
-
-
-
-
-
+    @JsonView(vueAlerte.class)
+    @GetMapping("/alertesSignalementNonTraite")
+    public List<Alerte> listeAlertesSignalementNonTraite(){
+        return this.alerteDao.findAlertesSignalementNonTraite();
+    }
+    @JsonView(vueAlerte.class)
+    @GetMapping("/alertesDemandeRetourNonTraite")
+    public List<Alerte> listeAlertesDemandeRetourNonTraite() {
+        return this.alerteDao.findAlertesDemandeRetourNonTraite();
+    }
+    @JsonView(vueAlerte.class)
+    @GetMapping("/alertesDemandeProlongationNonTraite")
+    public List<Alerte> listeAlertesDemandeProlongationNonTraite(){
+        return this.alerteDao.findAlertesDemandeProlongationNonTraite();
+    }
 
 
 }
