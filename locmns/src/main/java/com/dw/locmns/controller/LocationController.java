@@ -1,5 +1,6 @@
 package com.dw.locmns.controller;
 
+import com.dw.locmns.Services.FichierService;
 import com.dw.locmns.dao.LocationDao;
 import com.dw.locmns.dao.ReservationDao;
 import com.dw.locmns.dao.UtilisateurDao;

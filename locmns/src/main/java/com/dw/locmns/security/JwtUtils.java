@@ -15,15 +15,15 @@ public class JwtUtils {
     public  String generateToken(MyUserDetails  userDetails){
 
         Map<String, Object> data = new HashMap<>();
-        data.put("id", userDetails.getUtilisateur().getIdUtilisateur());
-        data.put("prenom", userDetails.getUtilisateur().getPrenomUtilisateur());//ajout du prenom dans le token
-       data.put("nom", userDetails.getUtilisateur().getNomUtilisateur());
-        data.put("adresse", userDetails.getUtilisateur().getAdresseUtilisateur());
-        data.put("mail", userDetails.getUtilisateur().getMailUtilisateur());
-        data.put("telephone", userDetails.getUtilisateur().getTelephoneUtilisateur());
-        data.put("motDePasse", userDetails.getUtilisateur().getMotDePasseUtilisateur());
+        data.put("idUtilisateur", userDetails.getUtilisateur().getIdUtilisateur());
+        data.put("nomUtilisateur", userDetails.getUtilisateur().getNomUtilisateur());
+        data.put("prenomUtilisateur", userDetails.getUtilisateur().getPrenomUtilisateur());
+        data.put("adresseUtilisateur", userDetails.getUtilisateur().getAdresseUtilisateur());
+        data.put("mailUtilisateur", userDetails.getUtilisateur().getMailUtilisateur());
+        data.put("telephoneUtilisateur", userDetails.getUtilisateur().getTelephoneUtilisateur());
+        data.put("motDePasseUtilisateur", "");
         data.put("typeUtilisateur", userDetails.getUtilisateur().getTypeUtilisateur());
-        //data.put("localisation", userDetails.getUtilisateur().getLocalisation());
+        data.put("localisation", userDetails.getUtilisateur().getLocalisation());
 
 
 
