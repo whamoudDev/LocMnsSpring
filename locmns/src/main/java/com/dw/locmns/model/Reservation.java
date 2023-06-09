@@ -29,11 +29,11 @@ public class Reservation {
     private Integer idReservation;
 
     @JsonView(vueReservation.class)
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    //@JsonFormat(pattern = "yyyy-MM-dd ")
     private LocalDateTime dateDebutReservation;
 
     @JsonView(vueReservation.class)
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+   // @JsonFormat(pattern = "yyyy-MM-dd ")
     private LocalDateTime dateFinPrevu;
 
     //@JsonView({vueUtilisateur.class, vueReservation.class})
@@ -42,7 +42,7 @@ public class Reservation {
     private String cadreUtilisation;
 
     @JsonView(vueReservation.class)
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    //@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime dateRetourReel;
 
 

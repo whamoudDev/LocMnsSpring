@@ -50,6 +50,13 @@ public UtilisateurController(UtilisateurDao utilisateurDao) {
 
         }
 
+    @GetMapping("/utilisateurByEmail/{email}")
+    @JsonView(vueUtilisateur.class)
+    public Utilisateur utilisateur(@PathVariable String email){
+        return this.utilisateurDao.findBymailUtilisateur(email).orElse(null);
+
+    }
+
     @PostMapping("/ajoutEditionUtilisateur")
     @JsonView(vueUtilisateur.class)
     public String ajoutEditionUtilisateur(@RequestPart("utilisateur") Utilisateur utilisateur) throws Exception {

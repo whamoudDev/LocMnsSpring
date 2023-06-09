@@ -46,6 +46,7 @@ public class ConnexionController {
                             utilisateur.getMailUtilisateur(),
                             utilisateur.getMotDePasseUtilisateur()
 
+
                     )).getPrincipal();
         } catch (BadCredentialsException e) {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);

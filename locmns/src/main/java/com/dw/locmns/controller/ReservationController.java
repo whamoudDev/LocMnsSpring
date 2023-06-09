@@ -11,6 +11,7 @@ import com.dw.locmns.view.vueReservation;
 import com.dw.locmns.view.vueUtilisateur;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
@@ -50,7 +51,9 @@ public class ReservationController {
     @PostMapping("/demandeReservation")
     @JsonView(vueReservation.class)
     public String demandeReservation(@RequestPart("reservation")  Reservation reservation) {
-         reservationDao.save(reservation);
+        //Enregistre la date du jour pour la date de demande
+        //reservation.setDateDebutReservation(LocalDateTime.now());
+        reservationDao.save(reservation);
          return "demande ajouté";
 
     }

@@ -1,5 +1,6 @@
 package com.dw.locmns.controller;
 
+import com.dw.locmns.Services.FichierService;
 import com.dw.locmns.dao.LocationDao;
 import com.dw.locmns.dao.ReservationDao;
 import com.dw.locmns.dao.UtilisateurDao;
@@ -36,8 +37,8 @@ public class LocationController {
 
     private ReservationDao reservationDao;
 
-    /*@Autowired
-    FichierService fichierService;*/
+    @Autowired
+    FichierService fichierService;
 
     @Autowired
     public LocationController(LocationDao locationDao, UtilisateurDao utilisateurDao, ReservationDao reservationDao) {
@@ -47,12 +48,10 @@ public class LocationController {
     }
 
 
-
-
     @JsonView(vueLocation.class)
     //@JsonView(vueUtilisateur.class)
     @GetMapping("/liste-locations")
-    public List<Location> listeLocationsUtilisateur(){
+    public List<Location> listeLocationsUtilisateur() {
         return this.locationDao.findAll();
     }
 
@@ -64,13 +63,9 @@ public class LocationController {
     }
 
 
-
-
-
-
     //@GetMapping("/liste-locations-utilisateur/{idUtilisateur}")//Récupérer les utilisateurs qui ont loué un matériel
     //@JsonView(vueLocation.class)
-   // @JsonView({vueUtilisateur.class, vueLocation.class})
+    // @JsonView({vueUtilisateur.class, vueLocation.class})
    /* public List<Location> listeLocationUtilisateur(@PathVariable("idUtilisateur") Integer idUtilisateur) {
         return this.locationDao.listeLocationsUtilisateur(idUtilisateur);
     }*/
@@ -84,9 +79,6 @@ public class LocationController {
     }
 
 
-
-
-
     @JsonView(vueUtilisateur.class)
     @DeleteMapping("/gestionnaire/location/{id}")
     public String deleteLocation(@PathVariable int id) {
@@ -97,24 +89,21 @@ public class LocationController {
 
     @JsonView(vueLocation.class)
     @GetMapping("/liste-location-numeroSerie")
-    public List<Location> ListeLocationNumeroSerie(){
+    public List<Location> ListeLocationNumeroSerie() {
         return this.locationDao.findAll();
     }
 
     @JsonView(vueLocation.class)
     @GetMapping("/materiels-defectueux") //Récupérer la liste des matériels défectueux
-    public List<Location> listeMaterielsDisponibles(){
+    public List<Location> listeMaterielsDisponibles() {
         return this.locationDao.findAllByEtatLocation("hors d'usage");
     }
 
 
-
-
-
-    /*@GetMapping("/photoLocation/{idLocation}")
-    public ResponseEntity<byte[]> getPhotoLocation(@PathVariable int idLocation){
+    @GetMapping("/photoLocation/{idLocation}")
+    public ResponseEntity<byte[]> getPhotoLocation(@PathVariable int idLocation) {
         Optional<Location> optional = locationDao.findById(idLocation);
-        if (optional.isPresent()){
+        if (optional.isPresent()) {
             String nomImage = optional.get().getNomLocation();
             try {
                 byte[] image = fichierService.getImageByName(nomImage);
@@ -133,8 +122,9 @@ public class LocationController {
 
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-*/
+
     }
+}
 
 
 

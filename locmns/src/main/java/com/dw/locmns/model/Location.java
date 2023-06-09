@@ -2,7 +2,6 @@ package com.dw.locmns.model;
 
 
 import com.dw.locmns.view.vueLocation;
-import com.dw.locmns.view.vueReservation;
 import com.dw.locmns.view.vueUtilisateur;
 import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Data;
