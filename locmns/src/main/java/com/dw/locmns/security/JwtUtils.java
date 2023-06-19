@@ -5,8 +5,12 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+
 
 @Component
 public class JwtUtils {
@@ -25,19 +29,21 @@ public class JwtUtils {
         data.put("typeUtilisateur", userDetails.getUtilisateur().getTypeUtilisateur());
         data.put("localisation", userDetails.getUtilisateur().getLocalisation());
 
-
-
-
-
-
         return Jwts.builder()
                 .setClaims(data)
                 .setSubject(userDetails.getUsername())
+                .setIssuedAt(new Date())
+                .setExpiration(toDate(LocalDateTime.now().plusMinutes(40L)))
 
                 .signWith(SignatureAlgorithm.HS256,"secret" )
                 .compact();
 
     }
+    private Date toDate(LocalDateTime localDateTime) {
+        return Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
+
+    }
+
     public Claims getTokenBody(String token){
         return Jwts.parser()
                 .setSigningKey("secret")

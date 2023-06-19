@@ -32,11 +32,4 @@ public class Localisation {
 
 
 
-    /*@JsonView(vueLocalisation.class)
-    @OneToMany(mappedBy = "localisation")
-    private Set<Utilisateur> ListeUtilisateur = new HashSet<>();*/
-
-
-
-
 }

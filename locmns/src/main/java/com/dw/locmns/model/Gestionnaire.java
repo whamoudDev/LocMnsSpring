@@ -20,9 +20,6 @@ public class Gestionnaire extends Utilisateur {
     private Set<Documentation> listeDocumentation = new HashSet<>();
 
 
-
-
-
     @JsonView(vueReparation.class)
     @OneToMany(mappedBy = "gestionnaire")
     private Set<Reparation> listeReparation = new HashSet<>();

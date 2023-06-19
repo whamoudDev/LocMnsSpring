@@ -34,41 +34,7 @@ public class MyUserDetails  implements UserDetails {
 
         return List.of(new SimpleGrantedAuthority(utilisateur.getTypeUtilisateur().getRoleUtilisateur()));
 
-
-        /*ArrayList<SimpleGrantedAuthority> listeAuthority = new ArrayList<>();
-
-        if(isGestionnaire) {
-            listeAuthority.add(new SimpleGrantedAuthority("ROLE_GESTIONNAIRE"));
-        }else{
-            listeAuthority.add(new SimpleGrantedAuthority("ROLE_UTILISATEUR"));
-        }
-
-        return listeAuthority;*/
     }
-
-
-
-
-
-   /* public boolean isSuperAdmin() {
-       return  getAuthorities().stream()
-                .anyMatch(authority -> authority.getAuthority().equals("ROLE_SUPER_ADMIN"));
-
-
-    }*/
-
-    /*private boolean isSuperAdmin() {
-        UserDetails currentUser = getAuthorities();
-        if (currentUser != null) {
-            return currentUser.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_SUPER_ADMIN"));
-        }
-        return false;
-    }
-*/
-
-
-
-
 
     @Override
     public String getPassword() {

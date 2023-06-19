@@ -51,7 +51,7 @@ VALUES
 
 INSERT INTO `documentation` (`nom_documentation`,`description_documentation`, `fichier_documentation`)
 VALUES
-("fiches techniques Ordinateur portable","description Ordinateur", "fiches produits Ordinateur portable"),
+("fiches techniques Ordinateur portable:","description Ordinateur", "fiches produits Ordinateur portable"),
 ("fiches techniques Webcam","description Webcam", "fiches produits Webcam"),
 ("fiches techniques casque VR","description casque VR", "fiches produits casque VR");
 

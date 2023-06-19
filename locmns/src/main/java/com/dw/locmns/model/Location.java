@@ -1,7 +1,9 @@
 package com.dw.locmns.model;
 
 
+import com.dw.locmns.view.vueDocumentation;
 import com.dw.locmns.view.vueLocation;
+import com.dw.locmns.view.vueReservation;
 import com.dw.locmns.view.vueUtilisateur;
 import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Data;
@@ -20,11 +22,11 @@ public class Location {
     private Integer idLocation;
     @JsonView({vueUtilisateur.class, vueLocation.class})
     private String nomLocation;
-    @JsonView({vueUtilisateur.class, vueLocation.class})
+    @JsonView({vueReservation.class, vueLocation.class})
     private String etatLocation;
-    @JsonView({vueUtilisateur.class, vueLocation.class})
+    @JsonView({vueReservation.class, vueLocation.class, vueDocumentation.class})
     private String descriptionLocation;
-    @JsonView({vueUtilisateur.class, vueLocation.class})
+    @JsonView({vueDocumentation.class, vueLocation.class})
     private String numSerieLocation;
 
     @JsonView({vueUtilisateur.class, vueLocation.class})

@@ -1,6 +1,7 @@
 package com.dw.locmns.model;
 
 import com.dw.locmns.view.vueDocumentation;
+import com.dw.locmns.view.vueLocation;
 import com.dw.locmns.view.vueUtilisateur;
 import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Data;
@@ -12,27 +13,25 @@ import java.util.Set;
 @Entity
 @Data
 public class Documentation {
-    @JsonView(vueUtilisateur.class)
+    @JsonView(vueDocumentation.class)
     @GeneratedValue(strategy = GenerationType.IDENTITY )
     @Id
     private Integer idDocumentation;
 
-    @JsonView(vueUtilisateur.class)
+    @JsonView(vueDocumentation.class)
     private  String nomDocumentation;
 
 
-    @JsonView(vueUtilisateur.class)
+    @JsonView(vueDocumentation.class)
     private  String descriptionDocumentation;
 
-    @JsonView(vueUtilisateur.class)
+    @JsonView(vueDocumentation.class)
     private  String fichierDocumentation;
 
-    /*@ManyToOne
-    Location location;*/
 
-   /* @ManyToOne
-    @JoinColumn(name = "idLocation")
-    private Location location;*/
+    @ManyToOne
+    @JsonView({vueLocation.class, vueDocumentation.class})
+    private Location location;
 
 
 

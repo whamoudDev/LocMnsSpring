@@ -47,13 +47,14 @@ public class Reservation {
 
 
 
-
+    //@JsonView({vueUtilisateur.class, vueReservation.class})
     @JsonView(vueUtilisateur.class)
     @ManyToOne
     private Utilisateur utilisateur;
 
     @ManyToOne
-    @JsonView(vueUtilisateur.class)
+    @JsonView({vueReservation.class, vueLocation.class})
+    //@JsonView(vueUtilisateur.class)
     private Location location;
 
    /* @JsonView(vueAlerte.class)

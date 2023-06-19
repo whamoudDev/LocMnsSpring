@@ -36,11 +36,6 @@ public class Reparation {
     private LocalDateTime dateRetourReel;
 
 
-    /*@JsonView(vueAlerte.class)
-    @OneToMany(mappedBy = "reparation")
-    private Set<Alerte> listeAlerte= new HashSet<>();
-*/
-
     @ManyToOne
     @JsonView(vueReparation.class)
     private Location location;

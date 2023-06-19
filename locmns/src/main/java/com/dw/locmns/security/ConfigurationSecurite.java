@@ -25,8 +25,6 @@ import java.util.List;
 @EnableWebSecurity
 public class ConfigurationSecurite extends WebSecurityConfigurerAdapter {
 
-
-
     @Autowired
     private DataSource dataSource;
 
@@ -55,7 +53,7 @@ public class ConfigurationSecurite extends WebSecurityConfigurerAdapter {
                 .cors().and()
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/type-utilisateurs", "/connexion", "/liste-localisations", "/liste-locations","/liste-locations/{idLocation}", "/liste-typeLocations","/liste-cadres-utilisation","/liste-reservations","/liste-reservations/{idReservation}","/dashboardgestionnaire").permitAll()
+                .antMatchers("/type-utilisateurs", "/connexion", "/liste-localisations", "/liste-locations","/liste-locations/{idLocation}", "/liste-typeLocations","/liste-cadres-utilisation","/liste-reservations","/liste-reservations/{idReservation}","/dashboardgestionnaire","/liste-documentation").permitAll()
                 .antMatchers("/**").hasAnyRole("UTILISATEUR", "GESTIONNAIRE", "SUPERADMIN")
 
                 .and().exceptionHandling()

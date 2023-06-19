@@ -41,9 +41,3 @@ public class MyUserDetailsServiceLocMns implements UserDetailsService {
 
 }
 
-   /* Utilisateur utilisateur = utilisateurDao.findBymailUtilisateur(String mailUtilisateur).orElseThrow(() -> new UsernameNotFoundException("Mauvais mail / mot de passe"));
-
-    Optional<Gestionnaire> gestionnaire  = gestionnaireDao.findById(utilisateur.getIdUtilisateur());
-
-    MyUserDetails myUserDetails = new myUserDetails(utilisateur, gestionnaire.isPresent() );
-        return myUserDetails;*/

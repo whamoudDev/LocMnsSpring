@@ -10,16 +10,12 @@ import java.util.Set;
 @Entity
 public class Photo {
 
-
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Integer idPhoto;
 
-
     private String photoLocation;
 
-   /* @OneToMany(mappedBy = "Location")
-    private Set<Photo> listeLocation= new HashSet<>();
-*/
+
 
 }
