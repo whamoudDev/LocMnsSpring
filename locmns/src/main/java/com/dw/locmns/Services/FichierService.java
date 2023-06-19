@@ -16,28 +16,56 @@ import java.nio.file.StandardCopyOption;
 public class FichierService {
 
 
-    @Value("${dossier.upload}")
-    private String dossierUpload;
+    @Value("${dossier.uploadImages}")
+    private String dossierImages;
+
+    @Value("${dossier.uploadDocumentations}")
+    private String dossierDocumentations;
 
 
+    public void transfertVersDossierImages(MultipartFile fichier, String nomFichier) throws IOException {
+        System.out.println("|||||||||||||||||||||||||||||||||||||||TRANSFERT IMAGE  |||||||||||||||||||||||||||||||||||||");
 
-    public void transfertVersDossierUpload(MultipartFile fichier, String nomFichier) throws IOException {
+        Path cheminDossierImages = Paths.get(dossierImages);
+        if(!Files.exists( cheminDossierImages)){
+            Files.createDirectories(cheminDossierImages);
+        }
+        Path destination = Paths.get(dossierImages+"/"+ nomFichier);
+        Files.copy(fichier.getInputStream(),destination, StandardCopyOption.REPLACE_EXISTING);
 
-        Path cheminDossierUpload = Paths.get(dossierUpload);
-        if(!Files.exists( cheminDossierUpload)){
-            Files.createDirectories(cheminDossierUpload);
+    }
+
+    public void transfertVersDossierDocumentations(MultipartFile fichier, String nomFichier) throws IOException {
+        System.out.println("|||||||||||||||||||||||||||||||||||||||TRANSFERT DOCUMENT  |||||||||||||||||||||||||||||||||||||");
+        Path cheminDossierDocumentations = Paths.get(dossierDocumentations);
+        if(!Files.exists( cheminDossierDocumentations)){
+            Files.createDirectories(cheminDossierDocumentations);
 
 
         }
-        Path destination = Paths.get(dossierUpload+"\\"+ nomFichier);
+        Path destination = Paths.get(dossierDocumentations+"/"+ nomFichier);
         Files.copy(fichier.getInputStream(),destination, StandardCopyOption.REPLACE_EXISTING);
 
     }
 
 
+
+
     public byte[] getImageByName(String nomImage) throws FileNotFoundException {
 
-        Path destination = Paths.get(dossierUpload+"/"+nomImage);// retrieve the image by its name
+        Path destination = Paths.get(dossierImages+"/"+nomImage);// retrieve the image by its name
+
+        try {
+            return IOUtils.toByteArray(destination.toUri());
+        } catch (IOException e) {
+            throw new FileNotFoundException(e.getMessage());
+        }
+
+    }
+
+    public byte[] getDocumentationByName(String nomDocument) throws FileNotFoundException {
+
+        Path destination = Paths.get(dossierDocumentations+"/"+nomDocument);// retrieve the image by its name
 
         try {
             return IOUtils.toByteArray(destination.toUri());

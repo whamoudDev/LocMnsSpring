@@ -1,57 +1,60 @@
 package com.dw.locmns.model;
 
 
-import com.dw.locmns.view.vueDocumentation;
-import com.dw.locmns.view.vueLocation;
-import com.dw.locmns.view.vueReservation;
-import com.dw.locmns.view.vueUtilisateur;
-import com.fasterxml.jackson.annotation.JsonView;
-import lombok.Data;
+import com.dw.locmns.view.*;
+import com.fasterxml.jackson.annotation.*;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-@Data
 @Entity
+//@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Location {
 
-    @JsonView({vueUtilisateur.class, vueLocation.class})
+    @JsonView({vueUtilisateur.class, vueReservation.class, vueLocation.class, vuePhoto.class, vueDocumentation.class})
     @GeneratedValue(strategy = GenerationType.IDENTITY )
     @Id
     private Integer idLocation;
-    @JsonView({vueUtilisateur.class, vueLocation.class})
+    @JsonView({vueUtilisateur.class, vueReservation.class, vueLocation.class, vuePhoto.class, vueDocumentation.class})
     private String nomLocation;
-    @JsonView({vueReservation.class, vueLocation.class})
+    @JsonView({vueUtilisateur.class, vueReservation.class, vueLocation.class, vuePhoto.class, vueDocumentation.class})
     private String etatLocation;
-    @JsonView({vueReservation.class, vueLocation.class, vueDocumentation.class})
+    @JsonView({vueUtilisateur.class, vueReservation.class, vueLocation.class, vuePhoto.class, vueDocumentation.class})
     private String descriptionLocation;
-    @JsonView({vueDocumentation.class, vueLocation.class})
+    @JsonView({vueUtilisateur.class, vueReservation.class, vueLocation.class, vuePhoto.class, vueDocumentation.class})
     private String numSerieLocation;
 
-    @JsonView({vueUtilisateur.class, vueLocation.class})
+    @JsonView({vueUtilisateur.class, vueReservation.class, vueLocation.class, vuePhoto.class, vueDocumentation.class})
     private String statutLocation;
     @ManyToOne
-    @JsonView({vueUtilisateur.class})
+    @JsonView({vueLocation.class})
     //@JoinColumn(name="id_localisation")
     private Localisation localisation;
 
     @ManyToOne
-    @JsonView({vueUtilisateur.class,vueLocation.class})
+    @JsonView({vueLocation.class})
     private TypeLocation typeLocation;
 
-    @OneToMany(mappedBy = "location")
-    @JsonView(vueUtilisateur.class)
-    private Set<Reservation> reservations = new HashSet<>();
 
-    @ManyToOne
-    //@JsonView({vueUtilisateur.class, vueLocation.class})
-    private Utilisateur utilisateur;
-    @JsonView({vueUtilisateur.class, vueLocation.class})
-    @OneToMany
-    private Set<Photo> listePhotos= new HashSet<>();
+        @JsonView({vueLocation.class})
+        @OneToMany(mappedBy = "location", cascade = CascadeType.ALL, orphanRemoval = true)
+        private Set<Photo> listePhotos= new HashSet<>();
+        @JsonView({vueLocation.class})
+        @OneToMany(mappedBy = "location", cascade = CascadeType.ALL, orphanRemoval = true)
+        private Set<Documentation> listeDocumentations = new HashSet<>();
+    //
+    //    @ManyToOne
+    //    @JsonView({vueUtilisateur.class, vueLocation.class})
+    //    private Utilisateur utilisateur;
 
-
-
+    @OneToMany(mappedBy="location")
+    @JsonView(vueLocation.class)
+    private Set<Reservation> reservation= new HashSet<>();
 
 }

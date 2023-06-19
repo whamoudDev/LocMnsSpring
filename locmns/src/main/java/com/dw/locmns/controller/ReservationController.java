@@ -50,7 +50,7 @@ public class ReservationController {
 //    }
 
     @PostMapping("/demandeReservation")
-    @JsonView(vueReservation.class)
+    @JsonView({vueReservation.class})
     public String demandeReservation(@RequestPart("reservation")  Reservation reservation) {
         //Enregistre la date du jour pour la date de demande
         //reservation.setDateDebutReservation(LocalDateTime.now());
@@ -63,14 +63,14 @@ public class ReservationController {
 
 
 
-    @JsonView(vueReservation.class)
+    @JsonView({vueReservation.class})
     @GetMapping("/liste-reservations")
     public List<Reservation> listeReservationUtilisateur(){
         return this.reservationDao.findAll();
     }
 
     @GetMapping("/liste-reservations/{idReservation}")
-    @JsonView(vueReservation.class)
+    @JsonView({vueReservation.class})
     public Reservation reservation(@PathVariable Integer idReservation) {
         return this.reservationDao.findById(idReservation).orElse(null);
 
@@ -115,20 +115,20 @@ public class ReservationController {
 
 
     @GetMapping("/liste-cadres-utilisation")
-    @JsonView(vueReservation.class)
+    @JsonView({vueReservation.class})
     public List<Reservation> listeCadresUtilisation(){
         return this.reservationDao.findAll();
     }
 
 
     @GetMapping("/reservationNonRendu")
-    @JsonView(vueReservation.class)
+    @JsonView({vueReservation.class})
     public List<Reservation> listeReservationNonRendu(){
         return  this.reservationDao.listeReservationNonRendu();
     }
 
     @GetMapping("/reservationEnCours")
-    @JsonView(vueReservation.class)
+    @JsonView({vueReservation.class})
     public List<Reservation> listeReservationEnCours(){
         return  this.reservationDao.listeReservationEnCours();
     }

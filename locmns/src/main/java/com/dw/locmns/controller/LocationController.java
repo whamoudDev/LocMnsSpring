@@ -1,22 +1,18 @@
 package com.dw.locmns.controller;
 
 import com.dw.locmns.Services.FichierService;
-import com.dw.locmns.dao.LocationDao;
-import com.dw.locmns.dao.ReservationDao;
-import com.dw.locmns.dao.UtilisateurDao;
-import com.dw.locmns.model.Location;
-import com.dw.locmns.model.Reservation;
-import com.dw.locmns.model.Utilisateur;
-import com.dw.locmns.view.vueLocation;
-import com.dw.locmns.view.vueReservation;
-import com.dw.locmns.view.vueUtilisateur;
+import com.dw.locmns.dao.*;
+import com.dw.locmns.model.*;
+import com.dw.locmns.view.*;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -25,20 +21,25 @@ import java.nio.file.Files;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @CrossOrigin
 @RestController
 public class LocationController {
+    @Autowired
     private LocationDao locationDao;
+    @Autowired
     private UtilisateurDao utilisateurDao;
 
+    @Autowired
     private ReservationDao reservationDao;
 
     @Autowired
-    FichierService fichierService;
+    private PhotoDao photoDao;
+    @Autowired
+    private DocumentationDao documentationDao;
+    @Autowired
+    private FichierService fichierService;
 
     @Autowired
     public LocationController(LocationDao locationDao, UtilisateurDao utilisateurDao, ReservationDao reservationDao) {
@@ -48,17 +49,14 @@ public class LocationController {
     }
 
 
-
-
     @JsonView(vueLocation.class)
-    //@JsonView(vueUtilisateur.class)
     @GetMapping("/liste-locations")
-    public List<Location> listeLocationsUtilisateur() {
+    public List<Location> listeLocations() {
         return this.locationDao.findAll();
     }
 
 
-    @JsonView(vueLocation.class)
+    @JsonView({vueLocation.class})
     @GetMapping("/liste-locations/{idLocation}")
     public Location location(@PathVariable Integer idLocation) {
         return this.locationDao.findById(idLocation).orElse(null);
@@ -73,44 +71,118 @@ public class LocationController {
     }*/
 
 
-    @JsonView(vueLocation.class)
+    @JsonView({vueLocation.class})
     @PostMapping("/gestionnaire/ajoutEditionLocation")//fonctionne
-    public String ajoutEditionLocation(@RequestBody Location location) throws Exception {
-        this.locationDao.save(location);
-        return "location crée";
+    public ResponseEntity<Location> ajoutEditionLocation(@RequestPart("location") Location location, @Nullable @RequestParam("image") MultipartFile image, @Nullable @RequestParam("fichier") MultipartFile fichier) throws Exception {
+        Location locationTemp = new Location();
+
+        if (location.getIdLocation() != null) {
+            Optional<Location> optional = locationDao.findById(location.getIdLocation());
+            if (optional.isPresent()) {
+                locationTemp = optional.get();
+            }
+        }
+
+        locationTemp.setNomLocation(location.getNomLocation());
+        locationTemp.setNumSerieLocation(location.getNumSerieLocation());
+        locationTemp.setEtatLocation(location.getEtatLocation());
+        locationTemp.setDescriptionLocation(location.getDescriptionLocation());
+        locationTemp.setStatutLocation(location.getStatutLocation());
+        locationTemp.setTypeLocation(location.getTypeLocation());
+        locationTemp.setLocalisation(location.getLocalisation());
+
+
+        System.out.println("|||||||||||||||||||||||||||||||||||||||LOCATION SAVE AND FLUSH|||||||||||||||||||||||||||||||||||||");
+        locationTemp = this.locationDao.saveAndFlush(locationTemp);
+
+
+        System.out.println("ID Location Temporaire : " + locationTemp.getIdLocation());
+
+        if (image != null) {
+            try {
+                System.out.println("|||||||||||||||||||||||||||||||||||||||PHOTO A RAJOUTER |||||||||||||||||||||||||||||||||||||");
+                Photo photo = new Photo();
+                String nomPhoto = UUID.randomUUID() + "_" + image.getOriginalFilename();
+
+                photo.setLocation(new Location());
+                photo.getLocation().setIdLocation(locationTemp.getIdLocation());
+                photo.setNomPhoto(nomPhoto);
+                this.photoDao.save(photo);
+                //nouvelleLocation.getListePhotos().add(photo);
+                fichierService.transfertVersDossierImages(image, nomPhoto);
+            } catch (IOException e) {
+                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+        }
+
+        if (fichier != null) {
+            try {
+                System.out.println("|||||||||||||||||||||||||||||||||||||||DOCUMENT A RAJOUTER |||||||||||||||||||||||||||||||||||||");
+                Documentation documentation = new Documentation();
+                String nomDocument = UUID.randomUUID() + "_" + fichier.getOriginalFilename();
+
+                documentation.setLocation(new Location());
+                documentation.getLocation().setIdLocation(locationTemp.getIdLocation());
+                documentation.setNomDocumentation(nomDocument);
+                this.documentationDao.save(documentation);
+                //nouvelleLocation.getListeDocumentations().add(documentation);
+                fichierService.transfertVersDossierDocumentations(fichier, nomDocument);
+            } catch (IOException e) {
+                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+        }
+
+
+        return new ResponseEntity<>(locationTemp, HttpStatus.OK);
     }
 
 
-    @JsonView(vueUtilisateur.class)
+    @JsonView({vueLocation.class})
     @DeleteMapping("/gestionnaire/location/{id}")
     public String deleteLocation(@PathVariable int id) {
+
+        List<Photo> listPhoto= this.photoDao.findByLocationId(id);
+        for(Photo photo : listPhoto){
+            photoDao.deleteById(photo.getIdPhoto());
+        }
+
+        List<Documentation> listDocumentation= this.documentationDao.findByLocationId(id);
+        for(Documentation doc : listDocumentation){
+            documentationDao.deleteById(doc.getIdDocumentation());
+        }
         this.locationDao.deleteById(id);
         return "Location supprimé";
     }
 
 
-    @JsonView(vueLocation.class)
+    @JsonView({vueLocation.class})
     @GetMapping("/liste-location-numeroSerie")
     public List<Location> ListeLocationNumeroSerie() {
         return this.locationDao.findAll();
     }
 
-    @JsonView(vueLocation.class)
+    @JsonView({vueLocation.class})
     @GetMapping("/materiels-defectueux") //Récupérer la liste des matériels défectueux
-    public List<Location> listeMaterielsDisponibles() {
+    public List<Location> listeMaterielsEnPanne() {
         return this.locationDao.findAllByEtatLocation("hors d'usage");
     }
-    @JsonView(vueLocation.class)
-    @GetMapping("/locationDisponible")
-    public List<Location> listeLocationDisponible(){
+
+
+    @JsonView({vueTypeLocation.class})
+    @GetMapping("/location-disponible")
+    public List<Location> listeLocationDisponible() {
         return this.locationDao.listeLocationDisponible();
 
     }
 
+    @GetMapping("/listePhotosLocation/{idLocation}")
+    public List<Photo> listePhotosLocation(@PathVariable int idLocation) {
+        return this.photoDao.findByLocationId(idLocation);
+    }
 
 
     @GetMapping("/photoLocation/{idLocation}")
-    public ResponseEntity<byte[]> getPhotoLocation(@PathVariable int idLocation){
+    public ResponseEntity<byte[]> getPhotoLocation(@PathVariable int idLocation) {
         Optional<Location> optional = locationDao.findById(idLocation);
         if (optional.isPresent()) {
             String nomImage = optional.get().getNomLocation();

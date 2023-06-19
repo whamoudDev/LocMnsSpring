@@ -1,9 +1,7 @@
 package com.dw.locmns.model;
 
 
-import com.dw.locmns.view.vueLocation;
-import com.dw.locmns.view.vueReservation;
-import com.dw.locmns.view.vueUtilisateur;
+import com.dw.locmns.view.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonTypeId;
 import com.fasterxml.jackson.annotation.JsonView;
@@ -17,48 +15,46 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+//@Data
 @Getter
 @Setter
-//@AllArgsConstructor
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
+@AllArgsConstructor
+@NoArgsConstructor
 public class Utilisateur  {
 
-    @JsonView({vueUtilisateur.class, vueLocation.class})
+    @JsonView({vueUtilisateur.class, vueReservation.class, vueLocation.class, vuePhoto.class, vueDocumentation.class})
     @GeneratedValue(strategy = GenerationType.IDENTITY )
     @Id
     protected Integer idUtilisateur;
 
-    @JsonView(vueUtilisateur.class)
+    @JsonView({vueUtilisateur.class, vueReservation.class, vueLocation.class, vuePhoto.class, vueDocumentation.class})
     protected String nomUtilisateur;
 
 
-    @JsonView(vueUtilisateur.class)
+    @JsonView({vueUtilisateur.class, vueReservation.class, vueLocation.class, vuePhoto.class, vueDocumentation.class})
     protected String prenomUtilisateur;
-    @JsonView(vueUtilisateur.class)
+    @JsonView({vueUtilisateur.class, vueReservation.class, vueLocation.class, vuePhoto.class, vueDocumentation.class})
     protected String adresseUtilisateur;
-    @JsonView(vueUtilisateur.class)
+    @JsonView({vueUtilisateur.class, vueReservation.class, vueLocation.class, vuePhoto.class, vueDocumentation.class})
     protected String motDePasseUtilisateur;
-    @JsonView(vueUtilisateur.class)
+    @JsonView({vueUtilisateur.class, vueReservation.class, vueLocation.class, vuePhoto.class, vueDocumentation.class})
     protected String mailUtilisateur;
-    @JsonView(vueUtilisateur.class)
+    @JsonView({vueUtilisateur.class, vueReservation.class, vueLocation.class, vuePhoto.class, vueDocumentation.class})
     protected String telephoneUtilisateur;
 
     @ManyToOne
-    @JsonView(vueUtilisateur.class)
+    @JsonView({vueUtilisateur.class, vueReservation.class, vueLocation.class, vuePhoto.class, vueDocumentation.class})
     private Localisation localisation;
 
     @ManyToOne
-    @JsonView(vueUtilisateur.class)
+    @JsonView({vueUtilisateur.class, vueReservation.class, vueLocation.class, vuePhoto.class, vueDocumentation.class})
     private TypeUtilisateur typeUtilisateur;
 
 
-    @JsonView(vueReservation.class)
+    @JsonView({vueUtilisateur.class})
     @OneToMany(mappedBy = "utilisateur")
     private Set<Reservation> listeReservation = new HashSet<>();
 
-
-
-    public Utilisateur() {
-    }
 }

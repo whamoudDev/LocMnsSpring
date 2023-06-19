@@ -4,13 +4,17 @@ import com.dw.locmns.view.vueAlerte;
 import com.dw.locmns.view.vueLocation;
 import com.dw.locmns.view.vueUtilisateur;
 import com.fasterxml.jackson.annotation.JsonView;
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Data
+//@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Alerte {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY )

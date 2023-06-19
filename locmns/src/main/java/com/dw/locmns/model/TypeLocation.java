@@ -1,23 +1,28 @@
 package com.dw.locmns.model;
 
 import com.dw.locmns.view.vueLocation;
+import com.dw.locmns.view.vueTypeLocation;
 import com.dw.locmns.view.vueUtilisateur;
 import com.fasterxml.jackson.annotation.JsonView;
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 
-@Data
+//@Data
+@Getter
+@Setter
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 public class TypeLocation {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @JsonView({vueUtilisateur.class, vueLocation.class})
+    @JsonView({vueLocation.class, vueTypeLocation.class})
     private Integer idTypeLocation;
 
 
-    @JsonView({vueUtilisateur.class, vueLocation.class})
+    @JsonView({vueLocation.class, vueTypeLocation.class})
     private String  libelleTypeLocation;
 
 

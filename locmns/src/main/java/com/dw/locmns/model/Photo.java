@@ -1,21 +1,38 @@
 package com.dw.locmns.model;
 
-import lombok.Data;
+import com.dw.locmns.view.*;
+import com.fasterxml.jackson.annotation.*;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-@Data
+
 @Entity
+//@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Photo {
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    @JsonView({vueUtilisateur.class, vueReservation.class,vueLocation.class,vuePhoto.class})
+    @GeneratedValue(strategy = GenerationType.IDENTITY )
     @Id
     private Integer idPhoto;
 
-    private String photoLocation;
+    @JsonView({vueUtilisateur.class, vueReservation.class,vueLocation.class,vuePhoto.class})
+    // Il s'agit du nom du fichier avec son extension
+    private String nomPhoto;
 
+
+
+
+    @JsonView({vuePhoto.class})
+    @ManyToOne
+    private Location location;
 
 
 }

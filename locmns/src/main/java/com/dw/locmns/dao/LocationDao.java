@@ -37,8 +37,8 @@ public interface LocationDao extends JpaRepository<Location, Integer> {
 
 
     //Récupére l'id et numéro de série des locations en cours de réservation de l'utilisateur
-    @Query("SELECT l.idLocation, l.numSerieLocation FROM Location l JOIN l.utilisateur u JOIN l.reservations r WHERE u.idUtilisateur = :utilisateurId AND r.dateFinPrevu > current_date")
-    List<Location> listeLocationUtilisateur(@Param("utilisateurId") Integer id);
+//    @Query("SELECT l.idLocation, l.numSerieLocation FROM Location l JOIN l.utilisateur u JOIN l.reservations r WHERE u.idUtilisateur = :utilisateurId AND r.dateFinPrevu > current_date")
+//    List<Location> listeLocationUtilisateur(@Param("utilisateurId") Integer id);
 
     @Query("SELECT L FROM Location L WHERE L.statutLocation='dispo' ")
     List<Location> listeLocationDisponible();

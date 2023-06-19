@@ -12,6 +12,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+//@Data
 @Getter
 @Setter
 @NoArgsConstructor
@@ -19,13 +20,13 @@ import java.util.Set;
 @Entity
 public class Localisation {
 
-    @JsonView(vueUtilisateur.class)
+    @JsonView({vueUtilisateur.class,vueLocation.class})
     @GeneratedValue(strategy = GenerationType.IDENTITY )
     @Id
     private Integer idLocalisation;
 
 
-    @JsonView(vueUtilisateur.class)
+    @JsonView({vueUtilisateur.class,vueLocation.class})
     private  String libelleLocalisation;
 
 

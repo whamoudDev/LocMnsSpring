@@ -4,7 +4,7 @@ import com.dw.locmns.view.vueAlerte;
 import com.dw.locmns.view.vueReparation;
 import com.dw.locmns.view.vueUtilisateur;
 import com.fasterxml.jackson.annotation.JsonView;
-import lombok.Data;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -13,7 +13,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Data
+//@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Reparation {
     @JsonView(vueReparation.class)
     @GeneratedValue(strategy = GenerationType.IDENTITY )
