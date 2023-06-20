@@ -33,7 +33,7 @@ public class JwtUtils {
                 .setClaims(data)
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date())
-                .setExpiration(toDate(LocalDateTime.now().plusMinutes(40L)))
+                .setExpiration(toDate(LocalDateTime.now().plusMinutes(540L)))
 
                 .signWith(SignatureAlgorithm.HS256,"secret" )
                 .compact();

@@ -62,6 +62,18 @@ public class LocationController {
         return this.locationDao.findById(idLocation).orElse(null);
     }
 
+    @GetMapping("/listePhotosLocation/{idLocation}")
+    public Set<Photo> listePhotosLocation(@PathVariable int idLocation) {
+        Optional<Location> optional = this.locationDao.findById(idLocation);
+
+        Location location;
+
+        if (optional.isPresent()) {
+            location = optional.get();
+            return location.getListePhotos();
+        }
+        return null;
+    }
 
     //@GetMapping("/liste-locations-utilisateur/{idUtilisateur}")//Récupérer les utilisateurs qui ont loué un matériel
     //@JsonView(vueLocation.class)
@@ -93,6 +105,8 @@ public class LocationController {
 
 
         System.out.println("|||||||||||||||||||||||||||||||||||||||LOCATION SAVE AND FLUSH|||||||||||||||||||||||||||||||||||||");
+
+        System.out.println("/////////////////ID : "+locationTemp.getIdLocation());
         locationTemp = this.locationDao.saveAndFlush(locationTemp);
 
 
@@ -141,15 +155,20 @@ public class LocationController {
     @DeleteMapping("/gestionnaire/location/{id}")
     public String deleteLocation(@PathVariable int id) {
 
-        List<Photo> listPhoto= this.photoDao.findByLocationId(id);
-        for(Photo photo : listPhoto){
-            photoDao.deleteById(photo.getIdPhoto());
-        }
-
-        List<Documentation> listDocumentation= this.documentationDao.findByLocationId(id);
-        for(Documentation doc : listDocumentation){
-            documentationDao.deleteById(doc.getIdDocumentation());
-        }
+//        List<Reservation> listReservation= this.reservationDao.findByIdLocation(id);
+//        for(Reservation reservation : listReservation){
+//            reservationDao.deleteById(reservation.getIdReservation());
+//        }
+//
+//        List<Photo> listPhoto= this.photoDao.findByLocationId(id);
+//        for(Photo photo : listPhoto){
+//            photoDao.deleteById(photo.getIdPhoto());
+//        }
+//
+//        List<Documentation> listDocumentation= this.documentationDao.findByLocationId(id);
+//        for(Documentation doc : listDocumentation){
+//            documentationDao.deleteById(doc.getIdDocumentation());
+//        }
         this.locationDao.deleteById(id);
         return "Location supprimé";
     }
@@ -175,10 +194,6 @@ public class LocationController {
 
     }
 
-    @GetMapping("/listePhotosLocation/{idLocation}")
-    public List<Photo> listePhotosLocation(@PathVariable int idLocation) {
-        return this.photoDao.findByLocationId(idLocation);
-    }
 
 
     @GetMapping("/photoLocation/{idLocation}")

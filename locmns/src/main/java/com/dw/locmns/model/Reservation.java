@@ -52,8 +52,8 @@ public class Reservation {
     @JsonView({vueReservation.class})
     private Location location;
 
-   /* @JsonView(vueAlerte.class)
-    @OneToMany(mappedBy = "reservation")
-    private Set<Alerte> listeAlerte= new HashSet<>();*/
+    @JsonView(vueReservation.class)
+    @OneToMany(mappedBy = "reservation", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Alerte> listeAlerte= new HashSet<>();
 
 }

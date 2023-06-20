@@ -30,7 +30,8 @@ public class Photo {
 
 
 
-    @JsonView({vuePhoto.class})
+//    @JsonView({vuePhoto.class})
+    @JsonIgnore
     @ManyToOne
     private Location location;
 

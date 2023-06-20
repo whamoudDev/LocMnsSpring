@@ -54,7 +54,7 @@ public class Utilisateur  {
 
 
     @JsonView({vueUtilisateur.class})
-    @OneToMany(mappedBy = "utilisateur")
+    @OneToMany(mappedBy = "utilisateur", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Reservation> listeReservation = new HashSet<>();
 
 }

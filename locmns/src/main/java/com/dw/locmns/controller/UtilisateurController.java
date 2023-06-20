@@ -72,7 +72,20 @@ public UtilisateurController(UtilisateurDao utilisateurDao) {
 
 
 
+    @DeleteMapping("/utilisateur/{idUtilisateur}")
+    @JsonView(vueUtilisateur.class)
+    public ResponseEntity<Utilisateur> supprimerUtilisateur(@PathVariable int idUtilisateur) {
 
+        Optional<Utilisateur> utilisateurTemp = utilisateurDao.findById(idUtilisateur);
+
+        if(utilisateurTemp.isPresent()) {
+            utilisateurDao.deleteById(idUtilisateur);
+
+            return new ResponseEntity<>(null,HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
 
 
     }

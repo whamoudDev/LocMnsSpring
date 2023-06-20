@@ -64,19 +64,27 @@ public class ReservationController {
 
 
     @JsonView({vueReservation.class})
-    @GetMapping("/liste-reservations")
-    public List<Reservation> listeReservationUtilisateur(){
+    @GetMapping("/reservations")
+    public List<Reservation> getListeReservations(){
         return this.reservationDao.findAll();
     }
 
-    @GetMapping("/liste-reservations/{idReservation}")
+    @GetMapping("/reservation/{idReservation}")
     @JsonView({vueReservation.class})
-    public Reservation reservation(@PathVariable Integer idReservation) {
+    public Reservation getReservation(@PathVariable Integer idReservation) {
         return this.reservationDao.findById(idReservation).orElse(null);
-
+    }
+    @GetMapping("/reservationUtilisateur/{idUtilisateur}")
+    @JsonView({vueReservation.class})
+    public List<Reservation> getListeReservationUtilisateur(@PathVariable Integer idUtilisateur) {
+        return this.reservationDao.findByIdUtilisateur(idUtilisateur);
     }
 
-
+    @GetMapping("/reservationLocation/{idLocation}")
+    @JsonView({vueReservation.class})
+    public List<Reservation> getListeReservationLocation(@PathVariable Integer idLocation) {
+        return this.reservationDao.findByIdLocation(idLocation);
+    }
 
 
 

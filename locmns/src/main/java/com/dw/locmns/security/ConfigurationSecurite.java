@@ -55,7 +55,7 @@ public class ConfigurationSecurite extends WebSecurityConfigurerAdapter {
                 .cors().and()
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/type-utilisateurs", "/connexion", "/liste-localisations", "/liste-locations","/liste-locations/{idLocation}", "/liste-typeLocations","/liste-cadres-utilisation","/liste-reservations","/liste-reservations/{idReservation}","/dashboardgestionnaire","/location-disponible","/listePhotosLocation/{idLocation","/liste-documentation").permitAll()
+                .antMatchers("/type-utilisateurs", "/connexion", "/liste-localisations", "/liste-locations","/liste-locations/{idLocation}", "/liste-typeLocations","/liste-cadres-utilisation","/reservations","/reservation/{idReservation}","/reservationUtilisateur/{idUtilisateur}","/reservationLocation/{idLocation}","/dashboardgestionnaire","/location-disponible","/listePhotosLocation/{idLocation}","/liste-documentation").permitAll()
                 .antMatchers("/**").hasAnyRole("UTILISATEUR", "GESTIONNAIRE", "SUPERADMIN")
 
                 .and().exceptionHandling()

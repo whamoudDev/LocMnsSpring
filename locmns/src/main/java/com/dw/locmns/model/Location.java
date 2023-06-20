@@ -53,7 +53,7 @@ public class Location {
     //    @JsonView({vueUtilisateur.class, vueLocation.class})
     //    private Utilisateur utilisateur;
 
-    @OneToMany(mappedBy="location")
+    @OneToMany(mappedBy="location", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonView(vueLocation.class)
     private Set<Reservation> reservation= new HashSet<>();
 

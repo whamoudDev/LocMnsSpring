@@ -15,10 +15,10 @@ INSERT INTO `type_utilisateur` (`role_utilisateur`) VALUES
 
 INSERT INTO `type_location` (`id_type_location`, `libelle_type_location`)
 VALUES
-(1, "ordinateur portable"),
-(2, "Webcam"),
-(3, "casque VR"),
-(4, "salle");
+(1, "Ordinateur portable"),
+(2, "Video Projecteur"),
+(3, "Casque VR"),
+(4, "Salle");
 
 --Insertion des tables principales dans l'ordre de dépendances
 INSERT INTO `utilisateur` (`nom_utilisateur`,`prenom_utilisateur`,`adresse_utilisateur`,`mot_de_passe_utilisateur`,`mail_utilisateur`,`telephone_utilisateur`,`localisation_id_localisation`, `type_utilisateur_id_type_utilisateur`)
@@ -26,7 +26,8 @@ VALUES
     ("zmander","donia","route du creve coeur","$2a$10$wXW2wHA2bu1TdQ26p.2UoehWv8m92w88kabSeL.348VqkpWvSt51q", "donia@donia.com", "0000000000",1,2),
     ("hamoud","walid","rue de verdun","$2a$10$wXW2wHA2bu1TdQ26p.2UoehWv8m92w88kabSeL.348VqkpWvSt51q", "walid@walid.com", "0000000000",2,2),
     ("sarah","sisi","rue de mns","$2a$10$wXW2wHA2bu1TdQ26p.2UoehWv8m92w88kabSeL.348VqkpWvSt51q", "sarah@sarah.com", "0000000000",1,3),
-    ("Lili","Lolo","rue de france","$2a$10$wXW2wHA2bu1TdQ26p.2UoehWv8m92w88kabSeL.348VqkpWvSt51q", "lili@lili.com", "0000000000",2,1);
+    ("Lili","Lolo","rue de france","$2a$10$wXW2wHA2bu1TdQ26p.2UoehWv8m92w88kabSeL.348VqkpWvSt51q", "lili@lili.com", "0000000000",2,1),
+    ("hamoud","Farid","rue de verdun","$2a$10$wXW2wHA2bu1TdQ26p.2UoehWv8m92w88kabSeL.348VqkpWvSt51q", "farid@farid.com", "0000000000",2,3);
 
     -- INSERT INTO reservation (`cadre_utilisation`, `date_debut_reservation`,`date_fin_prevu`,`date_retour_reel`, `location_id_location`, `utilisateur_id_utilisateur`)
     -- VALUES
@@ -43,24 +44,26 @@ VALUES
 INSERT INTO `location` (`description_location`,`etat_location`,`nom_location`, `num_serie_location`,`statut_location`, `localisation_id_localisation`, `type_location_id_type_location`)
 VALUES
 ("DEll intel core i5", "operationnel", "ordinateur portable", "VX550","reserve",1, 1),
-("MSI intel core i5", "hors d'usage", "Webcam", "VX110","dispo",2, 2),
+("MSI projecteur", "hors d'usage", "Video projecteur", "VX110","dispo",2, 2),
 ("Asus intel core i5", "neuf", "Ordinateur portable", "VX110","reparation",2, 1),
 ("DEll intel core i5", "operationnel", "ordinateur portable", "VX550","reserve",1, 1),
-("MSI intel core i5", "hors d'usage", "Webcam", "VX110","dispo",2, 2),
-("Asus intel core i5", "neuf", "Ordinateur portable", "VX110","reparation",2, 1);
+("MSI projecteur", "hors d'usage", "Video projecteur", "VX110","dispo",2, 2),
+("Salle 104", "bon", "Salle", "104","dispo",1, 4),
+("MSI projecteur", "neuf", "Video projecteur", "VX245","reserve",2, 2);
 
 INSERT INTO `reservation` (`cadre_utilisation`, `date_debut_reservation`,`date_fin_prevu`,`date_retour_reel`,`utilisateur_id_utilisateur`,`location_id_location`)
  VALUES
  ("Cours","2023-01-15", "2023-06-30",NULL,1,1 ),
  ("Journée portes ouvertes", "2023-02-02","2023-02-05", NULL, 1, 3 ),
  ("Réunion", "2023-01-01", "2023-01-03",NULL, 2 ,4 ),
- ("Location longue", "2023-09-01","2025-09-01",NULL,2,6 );
+ ("Location longue", "2023-09-01","2025-09-01",NULL,2,6 ),
+ ("Journée portes ouvertes", "2023-02-02","2023-02-05", NULL, 5, 7 );
 
 
 INSERT INTO `documentation` (`nom_documentation`,location_id_location)
 VALUES
 ("fichestechniquesOrdinateurportable.pdf",1),
-("fichestechniquesWebcam.pdf",2),
+("fichestechniquesVideo projecteur.pdf",2),
 ("fichestechniquescasqueVR.pdf",3);
 
 
