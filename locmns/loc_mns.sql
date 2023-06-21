@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS `alerte` (
   KEY `FKdjsk38p5eedcxp2fr0nebu7yq` (`reservation_id_reservation`),
   KEY `FKogx5i37wkixrlmtmpdhd50ebf` (`type_alerte_id_type_alerte`),
   KEY `FKeyiubkgj11sswp9ek39ocosjs` (`utilisateur_id_utilisateur`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `alerte`
@@ -90,7 +90,7 @@ CREATE TABLE IF NOT EXISTS `documentation` (
   `location_id_location` int DEFAULT NULL,
   PRIMARY KEY (`id_documentation`),
   KEY `FKnev3cr2ukb08bk98aa0qpd7l7` (`location_id_location`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `documentation`
@@ -111,7 +111,7 @@ DROP TABLE IF EXISTS `gestionnaire`;
 CREATE TABLE IF NOT EXISTS `gestionnaire` (
   `id_utilisateur` int NOT NULL,
   PRIMARY KEY (`id_utilisateur`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -124,7 +124,7 @@ CREATE TABLE IF NOT EXISTS `localisation` (
   `id_localisation` int NOT NULL AUTO_INCREMENT,
   `libelle_localisation` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_localisation`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `localisation`
@@ -153,7 +153,7 @@ CREATE TABLE IF NOT EXISTS `location` (
   PRIMARY KEY (`id_location`),
   KEY `FK5ks141mg9som3bo1i0bmdkovt` (`localisation_id_localisation`),
   KEY `FK2kni8ibe2ynobsftllkspqwfe` (`type_location_id_type_location`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `location`
@@ -181,7 +181,7 @@ CREATE TABLE IF NOT EXISTS `photo` (
   `location_id_location` int DEFAULT NULL,
   PRIMARY KEY (`id_photo`),
   KEY `FKhbfliysuq6fojnspdf8oum8o3` (`location_id_location`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `photo`
@@ -215,7 +215,7 @@ CREATE TABLE IF NOT EXISTS `reparation` (
   PRIMARY KEY (`id_reparation`),
   KEY `FKthgo0lije8tokgd4atm1sjuv5` (`gestionnaire_id_utilisateur`),
   KEY `FK5tf85r3hoecj7r31qd02ktbup` (`location_id_location`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `reparation`
@@ -246,7 +246,7 @@ CREATE TABLE IF NOT EXISTS `reservation` (
   PRIMARY KEY (`id_reservation`),
   KEY `FKsme51vko5so8xtly7i99x5w1l` (`location_id_location`),
   KEY `FK763syf6fx07toe3t5kxl1mhqo` (`utilisateur_id_utilisateur`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `reservation`
@@ -270,7 +270,7 @@ CREATE TABLE IF NOT EXISTS `type_alerte` (
   `id_type_alerte` int NOT NULL AUTO_INCREMENT,
   `type_alerte` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_type_alerte`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `type_alerte`
@@ -294,7 +294,7 @@ CREATE TABLE IF NOT EXISTS `type_location` (
   `id_type_location` int NOT NULL AUTO_INCREMENT,
   `libelle_type_location` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_type_location`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `type_location`
@@ -317,7 +317,7 @@ CREATE TABLE IF NOT EXISTS `type_utilisateur` (
   `id_type_utilisateur` int NOT NULL AUTO_INCREMENT,
   `role_utilisateur` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_type_utilisateur`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `type_utilisateur`
@@ -348,7 +348,7 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   PRIMARY KEY (`id_utilisateur`),
   KEY `FKthf8nj1f9clcuvqk1665guwn9` (`localisation_id_localisation`),
   KEY `FK5lds2hl7kcp7l5u3nxv06wdw9` (`type_utilisateur_id_type_utilisateur`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `utilisateur`
