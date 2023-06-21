@@ -10,4 +10,4 @@ docker stop conteneur-spring-locmns
 # Supprimer le conteneur existant
 docker rm -f conteneur-spring-locmns
 # Lancer un nouveau conteneur
-docker run -d --net backend --ip 172.18.0.14 --name=conteneur-spring-locmns -p 8181:8383 -v uploaded_files:/uploads locmns
+docker run -d --net backend --ip 172.18.0.14 --name=conteneur-spring-locmns -p 8080:8080 -v uploaded_files:/uploads locmns
