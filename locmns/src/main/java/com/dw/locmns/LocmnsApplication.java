@@ -2,6 +2,8 @@ package com.dw.locmns;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 import javax.annotation.PostConstruct;
@@ -10,7 +12,7 @@ import java.util.TimeZone;
 
 @EnableJpaAuditing
 @SpringBootApplication
-public class LocmnsApplication {
+public class LocmnsApplication extends SpringBootServletInitializer {
 
 	public static void main(String[] args) {
 
@@ -18,6 +20,10 @@ public class LocmnsApplication {
 
 	}
 
+	@Override
+	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+		return application.sources(LocmnsApplication.class);
+	}
 
 	@PostConstruct
 	public void init(){
