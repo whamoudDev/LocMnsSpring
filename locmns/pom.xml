@@ -19,7 +19,7 @@
     </properties>
     <dependencies>
 
-		
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
@@ -84,14 +84,6 @@
             <version>2.11.0</version>
         </dependency>
 
-       <!-- <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <scope>runtime</scope>
-            <optional>true</optional>
-        </dependency>
--->
-
 
     </dependencies>
 
@@ -112,7 +104,8 @@
                 <initialisation_donnee_bdd>true</initialisation_donnee_bdd>
                 <mode_initialisation_donnee_bdd>always</mode_initialisation_donnee_bdd>
                 <dossier_images>A changer dans le fichier C:\Users\nomuserswindows\.m2\settings.xml</dossier_images>
-                <dossier_documentations>A changer dans le fichier C:\Users\nomuserswindows\.m2\settings.xml</dossier_documentations>
+                <dossier_documentations>A changer dans le fichier C:\Users\nomuserswindows\.m2\settings.xml
+                </dossier_documentations>
                 <jwt_secret>secret</jwt_secret>
             </properties>
         </profile>
@@ -157,7 +150,7 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId >maven-surefire-plugin</artifactId>
+                <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.0.0-M6</version>
                 <configuration>
                     <skipTests>${skipUnitTest}</skipTests>
