@@ -19,7 +19,6 @@ import java.util.List;
 public class TypeUtilisateurController {
 
 
-
     @Autowired
     private TypeUtilisateurDao typeUtilisateurDao;
 
@@ -33,17 +32,16 @@ public class TypeUtilisateurController {
     }
 
 
-
-    @GetMapping("/type-utilisateurs")
+    @GetMapping("/users/type-utilisateurs")
     @JsonView(vueUtilisateur.class)
-    public List<TypeUtilisateur> getTypeUtilisateurs(){return this.typeUtilisateurDao.findAll();
+    public List<TypeUtilisateur> getTypeUtilisateurs() {
+        return this.typeUtilisateurDao.findAll();
     }
 
-    @GetMapping("/type-utilisateurs/{id}")
-    public TypeUtilisateur typeUtilisateur(@PathVariable Integer id){
+    @GetMapping("/users/type-utilisateurs/{id}")
+    public TypeUtilisateur typeUtilisateur(@PathVariable Integer id) {
         return this.typeUtilisateurDao.findById(id).orElse(null);
     }
-
 
 
 }

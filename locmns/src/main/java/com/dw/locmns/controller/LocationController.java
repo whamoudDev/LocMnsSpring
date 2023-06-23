@@ -50,19 +50,19 @@ public class LocationController {
 
 
     @JsonView(vueLocation.class)
-    @GetMapping("/liste-locations")
+    @GetMapping("/users/liste-locations")
     public List<Location> listeLocations() {
         return this.locationDao.findAll();
     }
 
 
     @JsonView({vueLocation.class})
-    @GetMapping("/liste-locations/{idLocation}")
+    @GetMapping("/users/liste-locations/{idLocation}")
     public Location location(@PathVariable Integer idLocation) {
         return this.locationDao.findById(idLocation).orElse(null);
     }
 
-    @GetMapping("/listePhotosLocation/{idLocation}")
+    @GetMapping("/users/listePhotosLocation/{idLocation}")
     public Set<Photo> listePhotosLocation(@PathVariable int idLocation) {
         Optional<Location> optional = this.locationDao.findById(idLocation);
 
@@ -74,13 +74,6 @@ public class LocationController {
         }
         return null;
     }
-
-    //@GetMapping("/liste-locations-utilisateur/{idUtilisateur}")//Récupérer les utilisateurs qui ont loué un matériel
-    //@JsonView(vueLocation.class)
-    // @JsonView({vueUtilisateur.class, vueLocation.class})
-   /* public List<Location> listeLocationUtilisateur(@PathVariable("idUtilisateur") Integer idUtilisateur) {
-        return this.locationDao.listeLocationsUtilisateur(idUtilisateur);
-    }*/
 
 
     @JsonView({vueLocation.class})
@@ -104,17 +97,12 @@ public class LocationController {
         locationTemp.setLocalisation(location.getLocalisation());
 
 
-        System.out.println("|||||||||||||||||||||||||||||||||||||||LOCATION SAVE AND FLUSH|||||||||||||||||||||||||||||||||||||");
-
-        System.out.println("/////////////////ID : "+locationTemp.getIdLocation());
         locationTemp = this.locationDao.saveAndFlush(locationTemp);
 
 
-        System.out.println("ID Location Temporaire : " + locationTemp.getIdLocation());
-
         if (image != null) {
             try {
-                System.out.println("|||||||||||||||||||||||||||||||||||||||PHOTO A RAJOUTER |||||||||||||||||||||||||||||||||||||");
+
                 Photo photo = new Photo();
                 String nomPhoto = UUID.randomUUID() + "_" + image.getOriginalFilename();
 
@@ -131,7 +119,7 @@ public class LocationController {
 
         if (fichier != null) {
             try {
-                System.out.println("|||||||||||||||||||||||||||||||||||||||DOCUMENT A RAJOUTER |||||||||||||||||||||||||||||||||||||");
+
                 Documentation documentation = new Documentation();
                 String nomDocument = UUID.randomUUID() + "_" + fichier.getOriginalFilename();
 
@@ -175,28 +163,27 @@ public class LocationController {
 
 
     @JsonView({vueLocation.class})
-    @GetMapping("/liste-location-numeroSerie")
+    @GetMapping("/users/liste-location-numeroSerie")
     public List<Location> ListeLocationNumeroSerie() {
         return this.locationDao.findAll();
     }
 
     @JsonView({vueLocation.class})
-    @GetMapping("/materiels-defectueux") //Récupérer la liste des matériels défectueux
+    @GetMapping("/users/materiels-defectueux") //Récupérer la liste des matériels défectueux
     public List<Location> listeMaterielsEnPanne() {
         return this.locationDao.findAllByEtatLocation("hors d'usage");
     }
 
 
     @JsonView({vueTypeLocation.class})
-    @GetMapping("/location-disponible")
+    @GetMapping("/users/location-disponible")
     public List<Location> listeLocationDisponible() {
         return this.locationDao.listeLocationDisponible();
 
     }
 
 
-
-    @GetMapping("/photoLocation/{idLocation}")
+    @GetMapping("/users/photoLocation/{idLocation}")
     public ResponseEntity<byte[]> getPhotoLocation(@PathVariable int idLocation) {
         Optional<Location> optional = locationDao.findById(idLocation);
         if (optional.isPresent()) {

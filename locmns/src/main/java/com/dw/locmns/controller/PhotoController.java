@@ -16,9 +16,6 @@ import java.util.List;
 public class PhotoController {
     @Autowired
     private PhotoDao photoDao;
-//    @GetMapping("/listePhotosLocation/{idLocation}")
-//    public List<Photo> listePhotosLocation(@PathVariable int idLocation) {
-//        return this.photoDao.findByLocationId(idLocation);
-//    }
+
 
 }

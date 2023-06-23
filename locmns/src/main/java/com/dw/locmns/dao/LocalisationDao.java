@@ -10,10 +10,4 @@ public interface LocalisationDao extends JpaRepository<Localisation, Integer> {
 
 
 
-
-
-
-
-
-
 }

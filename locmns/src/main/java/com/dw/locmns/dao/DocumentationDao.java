@@ -10,10 +10,10 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface DocumentationDao  extends JpaRepository<Documentation, Integer> {
+public interface DocumentationDao extends JpaRepository<Documentation, Integer> {
 
     @Query("SELECT D FROM Documentation D WHERE D.location.idLocation = :id")
-    List<Documentation> findByLocationId(@Param("id")int id);
+    List<Documentation> findByLocationId(@Param("id") int id);
 
 
 }

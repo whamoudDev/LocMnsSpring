@@ -32,7 +32,6 @@ public class ReservationController {
     private UtilisateurDao utilisateurDao;
 
 
-
     @Autowired
     public ReservationController(ReservationDao reservationDao, UtilisateurDao utilisateurDao, LocationDao locationDao) {
         this.reservationDao = reservationDao;
@@ -41,104 +40,59 @@ public class ReservationController {
     }
 
 
-//    @PostMapping("/demandeReservation")
-//    @JsonView(vueReservation.class)
-//    public String demandeReservation(@RequestBody Reservation reservationAenregistrer) {
-//        reservationDao.save(reservationAenregistrer);
-//       // return reservationAenregistrer;
-//         return "demande ajouté";
-//    }
-
-    @PostMapping("/demandeReservation")
+    @PostMapping("/users/demandeReservation")
     @JsonView({vueReservation.class})
-    public String demandeReservation(@RequestPart("reservation")  Reservation reservation) {
+    public String demandeReservation(@RequestPart("reservation") Reservation reservation) {
         //Enregistre la date du jour pour la date de demande
         //reservation.setDateDebutReservation(LocalDateTime.now());
         reservationDao.save(reservation);
-         return "demande ajouté";
+        return "demande ajouté";
 
     }
-
-
-
 
 
     @JsonView({vueReservation.class})
-    @GetMapping("/reservations")
-    public List<Reservation> getListeReservations(){
+    @GetMapping("/users/reservations")
+    public List<Reservation> getListeReservations() {
         return this.reservationDao.findAll();
     }
 
-    @GetMapping("/reservation/{idReservation}")
+    @GetMapping("/users/reservation/{idReservation}")
     @JsonView({vueReservation.class})
     public Reservation getReservation(@PathVariable Integer idReservation) {
         return this.reservationDao.findById(idReservation).orElse(null);
     }
-    @GetMapping("/reservationUtilisateur/{idUtilisateur}")
+
+    @GetMapping("/users/reservationUtilisateur/{idUtilisateur}")
     @JsonView({vueReservation.class})
     public List<Reservation> getListeReservationUtilisateur(@PathVariable Integer idUtilisateur) {
         return this.reservationDao.findByIdUtilisateur(idUtilisateur);
     }
 
-    @GetMapping("/reservationLocation/{idLocation}")
+    @GetMapping("/users/reservationLocation/{idLocation}")
     @JsonView({vueReservation.class})
     public List<Reservation> getListeReservationLocation(@PathVariable Integer idLocation) {
         return this.reservationDao.findByIdLocation(idLocation);
     }
 
 
-
-
-
-
-
-
-
-
-        /*@GetMapping("/reservations/{idReservation}")
-    public Reservation getDemandeReservationById(@PathVariable Integer idReservation) {
-        return reservationDao.findById(idReservation).orElse(null);
-    }
-*/
-
-    /*@PutMapping("/reservations/{id}")
-    public Reservation updateReservation(@PathVariable Integer id, @RequestBody Reservation reservation) {
-        reservation.setIdReservation(id);
-        return reservationDao.save(reservation);
-    }
-*/
-
-
-
-    /*@JsonView(vueReservation.class)
-    @GetMapping("gestionnaire/reservation/{idUtilisateur}/{idReservation}/{dateDebutReservation}")
-    public Reservation reservation(@PathVariable Integer idUtilisateur,
-                                   @PathVariable Integer idReservation,
-                                   @PathVariable String dateDebutReservation)
-            throws ParseException {
-        Date nouvelleDateReservation= new SimpleDateFormat("yyyy-MM-dd").parse(dateDebutReservation);
-
-        return this.reservationDao.findByUtilisateurIdUtilisateurAndIdReservationAndDateDebutReservation(idUtilisateur, idReservation, nouvelleDateReservation).orElse(null);
-    }*/
-
-
-    @GetMapping("/liste-cadres-utilisation")
+    @GetMapping("/users/liste-cadres-utilisation")
     @JsonView({vueReservation.class})
-    public List<Reservation> listeCadresUtilisation(){
+    public List<Reservation> listeCadresUtilisation() {
         return this.reservationDao.findAll();
     }
 
 
-    @GetMapping("/reservationNonRendu")
+    @GetMapping("/gestionnaire/reservationNonRendu")
     @JsonView({vueReservation.class})
-    public List<Reservation> listeReservationNonRendu(){
-        return  this.reservationDao.listeReservationNonRendu();
+    public List<Reservation> listeReservationNonRendu() {
+        return this.reservationDao.listeReservationNonRendu();
     }
 
-    @GetMapping("/reservationEnCours")
+    @GetMapping("/gestionnaire/reservationEnCours")
     @JsonView({vueReservation.class})
-    public List<Reservation> listeReservationEnCours(){
-        return  this.reservationDao.listeReservationEnCours();
+    public List<Reservation> listeReservationEnCours() {
+        return this.reservationDao.listeReservationEnCours();
     }
 
 

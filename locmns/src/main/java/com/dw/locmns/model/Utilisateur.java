@@ -15,23 +15,21 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-//@Data
 @Getter
 @Setter
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @AllArgsConstructor
 @NoArgsConstructor
-public class Utilisateur  {
+public class Utilisateur {
 
     @JsonView({vueUtilisateur.class, vueReservation.class, vueLocation.class, vuePhoto.class, vueDocumentation.class})
-    @GeneratedValue(strategy = GenerationType.IDENTITY )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     protected Integer idUtilisateur;
 
     @JsonView({vueUtilisateur.class, vueReservation.class, vueLocation.class, vuePhoto.class, vueDocumentation.class})
     protected String nomUtilisateur;
-
 
     @JsonView({vueUtilisateur.class, vueReservation.class, vueLocation.class, vuePhoto.class, vueDocumentation.class})
     protected String prenomUtilisateur;
@@ -51,7 +49,6 @@ public class Utilisateur  {
     @ManyToOne
     @JsonView({vueUtilisateur.class, vueReservation.class, vueLocation.class, vuePhoto.class, vueDocumentation.class})
     private TypeUtilisateur typeUtilisateur;
-
 
     @JsonView({vueUtilisateur.class})
     @OneToMany(mappedBy = "utilisateur", cascade = CascadeType.ALL, orphanRemoval = true)

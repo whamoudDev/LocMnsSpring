@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+
 @Service
 public class MyUserDetailsServiceLocMns implements UserDetailsService {
     @Autowired
@@ -23,20 +24,19 @@ public class MyUserDetailsServiceLocMns implements UserDetailsService {
     private GestionnaireDao gestionnaireDao;
 
     @Autowired
-    MyUserDetailsServiceLocMns(UtilisateurDao utilisateurDao){
+    MyUserDetailsServiceLocMns(UtilisateurDao utilisateurDao) {
         this.utilisateurDao = utilisateurDao;
     }
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Optional<Utilisateur> optional = utilisateurDao.findBymailUtilisateur(email);
-        if (optional.isEmpty()){
+        if (optional.isEmpty()) {
             throw new UsernameNotFoundException("L'utilisateur n'existe pas");
 
         }
         return new MyUserDetails((optional.get()));
     }
-
 
 
 }

@@ -30,12 +30,10 @@ public class ReparationController {
 
 
     @JsonView(vueReparation.class)
-    @GetMapping("/reparationEnCours")
-    public List<Reparation> listeReparationEnCours(){
+    @GetMapping("/gestionnaire/reparationEnCours")
+    public List<Reparation> listeReparationEnCours() {
         return this.reparationDao.findReparationEnCours();
     }
-
-
 
 
 }

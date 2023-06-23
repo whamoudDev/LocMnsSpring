@@ -14,6 +14,4 @@ public interface GestionnaireDao extends JpaRepository<Gestionnaire, Integer> {
     Optional<Utilisateur> findBymailUtilisateur(String mailUtilisateur);
 
 
-
-
 }

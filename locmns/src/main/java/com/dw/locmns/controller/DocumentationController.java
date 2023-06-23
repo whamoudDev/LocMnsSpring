@@ -24,7 +24,7 @@ public class DocumentationController {
     private LocationDao locationDao;
 
     @JsonView(vueDocumentation.class)
-    @GetMapping("/liste-documentation")
+    @GetMapping("/users/liste-documentation")
     public List<Documentation> listeDocumentation() {
         return this.documentationDao.findAll();
     }

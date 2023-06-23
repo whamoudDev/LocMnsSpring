@@ -31,19 +31,17 @@ public class LocalisationController {
     private LocalisationDao localisationDao;
 
 
-    @GetMapping("/liste-localisations")
+    @GetMapping("/users/liste-localisations")
     @JsonView(vueUtilisateur.class)
-    public List<Localisation> getListeLocalisation(){
+    public List<Localisation> getListeLocalisation() {
         return localisationDao.findAll();
     }
 
 
-    @GetMapping ("/gestionnaire/localisation/{id}")
-    public Localisation localisation(@PathVariable Integer id){
+    @GetMapping("/users/localisation/{id}")
+    public Localisation localisation(@PathVariable Integer id) {
         return this.localisationDao.findById(id).orElse(null);
     }
-
-
 
 
 }

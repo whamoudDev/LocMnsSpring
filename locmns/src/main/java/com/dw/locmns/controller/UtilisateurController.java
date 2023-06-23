@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.lang.Nullable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+
 import java.security.SecureRandom;
 
 
@@ -28,40 +29,38 @@ public class UtilisateurController {
     private PasswordEncoder encoder;
 
 
-@Autowired
-public UtilisateurController(UtilisateurDao utilisateurDao) {
+    @Autowired
+    public UtilisateurController(UtilisateurDao utilisateurDao) {
         this.utilisateurDao = utilisateurDao;
     }
 
 
-
-    @GetMapping("/liste-utilisateurs")
+    @GetMapping("/users/liste-utilisateurs")
     @JsonView(vueUtilisateur.class)
-    public List<Utilisateur> listeUtilisateurs(){
+    public List<Utilisateur> listeUtilisateurs() {
         return this.utilisateurDao.findAll();
     }
 
 
-
-    @GetMapping("/utilisateur/{id}")
+    @GetMapping("/users/utilisateur/{id}")
     @JsonView(vueUtilisateur.class)
-    public Utilisateur utilisateur(@PathVariable Integer id){
-    return this.utilisateurDao.findById(id).orElse(null);
+    public Utilisateur utilisateur(@PathVariable Integer id) {
+        return this.utilisateurDao.findById(id).orElse(null);
 
-        }
+    }
 
-    @GetMapping("/utilisateurByEmail/{email}")
+    @GetMapping("/users/utilisateurByEmail/{email}")
     @JsonView(vueUtilisateur.class)
-    public Utilisateur utilisateur(@PathVariable String email){
+    public Utilisateur utilisateur(@PathVariable String email) {
         return this.utilisateurDao.findBymailUtilisateur(email).orElse(null);
 
     }
 
-    @PostMapping("/ajoutEditionUtilisateur")
+    @PostMapping("/gestionnaire/ajoutEditionUtilisateur")
     @JsonView(vueUtilisateur.class)
     public String ajoutEditionUtilisateur(@RequestPart("utilisateur") Utilisateur utilisateur) throws Exception {
 
-        if(utilisateur.getTypeUtilisateur().getRoleUtilisateur().equals("ROLE_SUPERADMIN")){
+        if (utilisateur.getTypeUtilisateur().getRoleUtilisateur().equals("ROLE_SUPERADMIN")) {
             utilisateur.setMotDePasseUtilisateur(encoder.encode(utilisateur.getMotDePasseUtilisateur()));
         }
 
@@ -70,25 +69,23 @@ public UtilisateurController(UtilisateurDao utilisateurDao) {
     }
 
 
-
-
-    @DeleteMapping("/utilisateur/{idUtilisateur}")
+    @DeleteMapping("/gestionnaire/utilisateur/{idUtilisateur}")
     @JsonView(vueUtilisateur.class)
     public ResponseEntity<Utilisateur> supprimerUtilisateur(@PathVariable int idUtilisateur) {
 
         Optional<Utilisateur> utilisateurTemp = utilisateurDao.findById(idUtilisateur);
 
-        if(utilisateurTemp.isPresent()) {
+        if (utilisateurTemp.isPresent()) {
             utilisateurDao.deleteById(idUtilisateur);
 
-            return new ResponseEntity<>(null,HttpStatus.OK);
+            return new ResponseEntity<>(null, HttpStatus.OK);
         }
 
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
 
-    }
+}
 
 
 

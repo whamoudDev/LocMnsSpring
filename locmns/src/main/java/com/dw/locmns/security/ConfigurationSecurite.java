@@ -26,7 +26,6 @@ import java.util.List;
 public class ConfigurationSecurite extends WebSecurityConfigurerAdapter {
 
 
-
     @Autowired
     private DataSource dataSource;
 
@@ -47,6 +46,7 @@ public class ConfigurationSecurite extends WebSecurityConfigurerAdapter {
 
 
     }
+
     @Override //Gestion de l'authorisation
     protected void configure(HttpSecurity http) throws Exception {
 
@@ -55,9 +55,11 @@ public class ConfigurationSecurite extends WebSecurityConfigurerAdapter {
                 .cors().and()
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/type-utilisateurs", "/connexion", "/liste-localisations", "/liste-locations","/liste-locations/{idLocation}", "/liste-typeLocations","/liste-cadres-utilisation","/reservations","/reservation/{idReservation}","/reservationUtilisateur/{idUtilisateur}","/reservationLocation/{idLocation}","/dashboardgestionnaire","/location-disponible","/listePhotosLocation/{idLocation}","/liste-documentation").permitAll()
+                .antMatchers("/gestionnaire/**").hasAnyRole("GESTIONNAIRE", "SUPERADMIN")
+                .antMatchers("/users/**").hasAnyRole("UTILISATEUR", "GESTIONNAIRE", "SUPERADMIN")
+                .antMatchers("/connexion").permitAll()
                 .antMatchers("/**").hasAnyRole("UTILISATEUR", "GESTIONNAIRE", "SUPERADMIN")
-
+                .anyRequest().authenticated()
                 .and().exceptionHandling()
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
@@ -74,7 +76,7 @@ public class ConfigurationSecurite extends WebSecurityConfigurerAdapter {
         maConfiguration.setAllowedOrigins(List.of("*"));
         maConfiguration.setAllowedMethods(List.of("GET", "POST", "DELETE", "PUT"));
         maConfiguration.setAllowedHeaders(List.of("X-Requested-With", "Origin", "Content-Type",
-                "Accept", "Authorization","Access-Control-Allow-Origin"));
+                "Accept", "Authorization", "Access-Control-Allow-Origin"));
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", maConfiguration);
@@ -82,21 +84,17 @@ public class ConfigurationSecurite extends WebSecurityConfigurerAdapter {
     }
 
 
-
     @Bean
-    public PasswordEncoder getPasswordEncoder(){
+    public PasswordEncoder getPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
 
-
     @Override
     @Bean
-    public AuthenticationManager authenticationManagerBean() throws Exception{
+    public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManager();
     }
-
-
 
 
 }

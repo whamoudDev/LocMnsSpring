@@ -27,13 +27,13 @@ public class TypeLocationController {
         this.typeLocationDao = typeLocationDao;
     }
 
-    @GetMapping("/liste-typeLocations")
-    public List<TypeLocation> ListeTypeLocations(){
+    @GetMapping("/users/liste-typeLocations")
+    public List<TypeLocation> ListeTypeLocations() {
         return this.typeLocationDao.findAll();
     }
 
-    @GetMapping("/typeLocation/{id}")
-    public TypeLocation typeLocation(@PathVariable Integer id){
+    @GetMapping("/users/typeLocation/{id}")
+    public TypeLocation typeLocation(@PathVariable Integer id) {
         return this.typeLocationDao.findById(id).orElse(null);
     }
 

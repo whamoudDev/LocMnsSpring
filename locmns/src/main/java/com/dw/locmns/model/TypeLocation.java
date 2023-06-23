@@ -8,7 +8,6 @@ import lombok.*;
 
 import javax.persistence.*;
 
-//@Data
 @Getter
 @Setter
 @Entity
@@ -23,14 +22,7 @@ public class TypeLocation {
 
 
     @JsonView({vueLocation.class, vueTypeLocation.class})
-    private String  libelleTypeLocation;
-
-
-   /* @OneToMany
-    private Location location;
-*/
-
-
+    private String libelleTypeLocation;
 
 
 }

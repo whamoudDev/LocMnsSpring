@@ -24,36 +24,32 @@ public class FichierService {
 
 
     public void transfertVersDossierImages(MultipartFile fichier, String nomFichier) throws IOException {
-        System.out.println("|||||||||||||||||||||||||||||||||||||||TRANSFERT IMAGE  |||||||||||||||||||||||||||||||||||||");
 
         Path cheminDossierImages = Paths.get(dossierImages);
-        if(!Files.exists( cheminDossierImages)){
+        if (!Files.exists(cheminDossierImages)) {
             Files.createDirectories(cheminDossierImages);
         }
-        Path destination = Paths.get(dossierImages+"/"+ nomFichier);
-        Files.copy(fichier.getInputStream(),destination, StandardCopyOption.REPLACE_EXISTING);
+        Path destination = Paths.get(dossierImages + "/" + nomFichier);
+        Files.copy(fichier.getInputStream(), destination, StandardCopyOption.REPLACE_EXISTING);
 
     }
 
     public void transfertVersDossierDocumentations(MultipartFile fichier, String nomFichier) throws IOException {
-        System.out.println("|||||||||||||||||||||||||||||||||||||||TRANSFERT DOCUMENT  |||||||||||||||||||||||||||||||||||||");
         Path cheminDossierDocumentations = Paths.get(dossierDocumentations);
-        if(!Files.exists( cheminDossierDocumentations)){
+        if (!Files.exists(cheminDossierDocumentations)) {
             Files.createDirectories(cheminDossierDocumentations);
 
 
         }
-        Path destination = Paths.get(dossierDocumentations+"/"+ nomFichier);
-        Files.copy(fichier.getInputStream(),destination, StandardCopyOption.REPLACE_EXISTING);
+        Path destination = Paths.get(dossierDocumentations + "/" + nomFichier);
+        Files.copy(fichier.getInputStream(), destination, StandardCopyOption.REPLACE_EXISTING);
 
     }
 
 
-
-
     public byte[] getImageByName(String nomImage) throws FileNotFoundException {
 
-        Path destination = Paths.get(dossierImages+"/"+nomImage);// retrieve the image by its name
+        Path destination = Paths.get(dossierImages + "/" + nomImage);
 
         try {
             return IOUtils.toByteArray(destination.toUri());
@@ -65,7 +61,7 @@ public class FichierService {
 
     public byte[] getDocumentationByName(String nomDocument) throws FileNotFoundException {
 
-        Path destination = Paths.get(dossierDocumentations+"/"+nomDocument);// retrieve the image by its name
+        Path destination = Paths.get(dossierDocumentations + "/" + nomDocument);
 
         try {
             return IOUtils.toByteArray(destination.toUri());
@@ -74,12 +70,6 @@ public class FichierService {
         }
 
     }
-
-
-
-
-
-
 
 
 }

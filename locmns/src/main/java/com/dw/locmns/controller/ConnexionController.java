@@ -42,17 +42,17 @@ public class ConnexionController {
 
         try {
 
-            userDetails=(MyUserDetails)   authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-                            utilisateur.getMailUtilisateur(),
-                            utilisateur.getMotDePasseUtilisateur()
+            userDetails = (MyUserDetails) authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+                    utilisateur.getMailUtilisateur(),
+                    utilisateur.getMotDePasseUtilisateur()
 
 
-                    )).getPrincipal();
+            )).getPrincipal();
         } catch (BadCredentialsException e) {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 
         }
-        return new ResponseEntity<>( jwtUtils.generateToken(userDetails), HttpStatus.OK);
+        return new ResponseEntity<>(jwtUtils.generateToken(userDetails), HttpStatus.OK);
 
     }
 

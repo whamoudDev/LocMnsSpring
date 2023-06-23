@@ -26,12 +26,12 @@ public class JwtFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String token = request.getHeader("Authorization"); //Recoit l'authorisation où il y a notre token
 
-        if(token != null && token.startsWith("Bearer ")){
+        if (token != null && token.startsWith("Bearer ")) {
             String jwt = token.substring(7); //Enleve les 7 caractères (Bearer + espace)
             String mail = jwtUtils.getTokenBody(jwt).getSubject();
             MyUserDetails userDetails = (MyUserDetails) this.myUserDetailsServiceLocMns.loadUserByUsername(mail);
 
-            if(jwtUtils.tokenValide(jwt, userDetails)){ //Vérifie la validité  des credentials
+            if (jwtUtils.tokenValide(jwt, userDetails)) { //Vérifie la validité  des credentials
                 UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
                         new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                 usernamePasswordAuthenticationToken
@@ -44,6 +44,5 @@ public class JwtFilter extends OncePerRequestFilter {
     }
 
 
-
-    }
+}
 

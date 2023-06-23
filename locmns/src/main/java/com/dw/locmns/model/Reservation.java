@@ -14,7 +14,6 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-//@Data
 @Getter
 @Setter
 @Entity
@@ -23,7 +22,7 @@ import java.util.Set;
 public class Reservation {
 
     @JsonView({vueUtilisateur.class, vueReservation.class, vueLocation.class, vuePhoto.class, vueDocumentation.class})
-    @GeneratedValue(strategy = GenerationType.IDENTITY )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Integer idReservation;
 
@@ -32,11 +31,9 @@ public class Reservation {
     private LocalDateTime dateDebutReservation;
 
     @JsonView({vueUtilisateur.class, vueReservation.class, vueLocation.class, vuePhoto.class, vueDocumentation.class})
-   // @JsonFormat(pattern = "yyyy-MM-dd ")
+    // @JsonFormat(pattern = "yyyy-MM-dd ")
     private LocalDateTime dateFinPrevu;
 
-    //@JsonView({vueUtilisateur.class, vueReservation.class})
-    //@JsonView(vueUtilisateur.class)
     @JsonView({vueUtilisateur.class, vueReservation.class, vueLocation.class, vuePhoto.class, vueDocumentation.class})
     private String cadreUtilisation;
 
@@ -54,6 +51,6 @@ public class Reservation {
 
     @JsonView(vueReservation.class)
     @OneToMany(mappedBy = "reservation", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Alerte> listeAlerte= new HashSet<>();
+    private Set<Alerte> listeAlerte = new HashSet<>();
 
 }

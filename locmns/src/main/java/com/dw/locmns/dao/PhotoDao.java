@@ -13,8 +13,5 @@ import java.util.List;
 @Repository
 public interface PhotoDao extends JpaRepository<Photo, Integer> {
 
-//    @Query("SELECT P FROM Photo P WHERE P.location.idLocation = :id")
-//    List<Photo> findByLocationId(@Param("id")int id);
-
 
 }

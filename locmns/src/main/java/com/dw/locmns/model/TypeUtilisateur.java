@@ -13,7 +13,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-//@Data
 @Getter
 @Setter
 @Entity
@@ -26,11 +25,6 @@ public class TypeUtilisateur {
     private Integer idTypeUtilisateur;
     @JsonView(vueUtilisateur.class)
     private String roleUtilisateur;
-
-
-
-
-
 
 
 }

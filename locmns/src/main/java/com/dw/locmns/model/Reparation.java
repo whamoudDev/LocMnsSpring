@@ -13,22 +13,21 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-//@Data
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Reparation {
     @JsonView(vueReparation.class)
-    @GeneratedValue(strategy = GenerationType.IDENTITY )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Integer idReparation;
 
     @JsonView(vueReparation.class)
-    private  String nomReparation;
+    private String nomReparation;
 
     @JsonView(vueReparation.class)
-    private  String descriptionPanne;
+    private String descriptionPanne;
 
     @JsonView(vueReparation.class)
     private LocalDateTime dateReception;
@@ -47,8 +46,6 @@ public class Reparation {
     @ManyToOne
     @JsonView(vueReparation.class)
     private Gestionnaire gestionnaire;
-
-
 
 
 }

@@ -24,7 +24,6 @@ import java.util.List;
 public class TypeAlerteController {
 
 
-
     @Autowired
     private TypeAlerteDao typeAlerteDao;
 
@@ -38,19 +37,18 @@ public class TypeAlerteController {
     }
 
 
-    @GetMapping("/type-alerte")
+    @GetMapping("/users/type-alerte")
     @JsonView(vueTypeAlerte.class)
     //@JsonView(vueUtilisateur.class)
-    public List<TypeAlerte> getTypeAlerte(){return this.typeAlerteDao.findAll();
+    public List<TypeAlerte> getTypeAlerte() {
+        return this.typeAlerteDao.findAll();
     }
 
 
-    @GetMapping("/type-alerte/{id}")
+    @GetMapping("/users/type-alerte/{id}")
     @JsonView(vueTypeAlerte.class)
-    public TypeAlerte typeAlerte(@PathVariable Integer id){
+    public TypeAlerte typeAlerte(@PathVariable Integer id) {
         return this.typeAlerteDao.findById(id).orElse(null);
     }
-
-
 
 }

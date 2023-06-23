@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface UtilisateurDao extends JpaRepository <Utilisateur, Integer>  {
+public interface UtilisateurDao extends JpaRepository<Utilisateur, Integer> {
 
     Optional<Utilisateur> findBymailUtilisateur(String mailUtilisateur);
 }

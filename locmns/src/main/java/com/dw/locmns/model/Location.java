@@ -10,7 +10,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-//@Data
 @Getter
 @Setter
 @NoArgsConstructor
@@ -18,7 +17,7 @@ import java.util.Set;
 public class Location {
 
     @JsonView({vueUtilisateur.class, vueReservation.class, vueLocation.class, vuePhoto.class, vueDocumentation.class})
-    @GeneratedValue(strategy = GenerationType.IDENTITY )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Integer idLocation;
     @JsonView({vueUtilisateur.class, vueReservation.class, vueLocation.class, vuePhoto.class, vueDocumentation.class})
@@ -42,19 +41,16 @@ public class Location {
     private TypeLocation typeLocation;
 
 
-        @JsonView({vueLocation.class})
-        @OneToMany(mappedBy = "location", cascade = CascadeType.ALL, orphanRemoval = true)
-        private Set<Photo> listePhotos= new HashSet<>();
-        @JsonView({vueLocation.class})
-        @OneToMany(mappedBy = "location", cascade = CascadeType.ALL, orphanRemoval = true)
-        private Set<Documentation> listeDocumentations = new HashSet<>();
-    //
-    //    @ManyToOne
-    //    @JsonView({vueUtilisateur.class, vueLocation.class})
-    //    private Utilisateur utilisateur;
+    @JsonView({vueLocation.class})
+    @OneToMany(mappedBy = "location", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Photo> listePhotos = new HashSet<>();
+    @JsonView({vueLocation.class})
+    @OneToMany(mappedBy = "location", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Documentation> listeDocumentations = new HashSet<>();
 
-    @OneToMany(mappedBy="location", cascade = CascadeType.ALL, orphanRemoval = true)
+
+    @OneToMany(mappedBy = "location", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonView(vueLocation.class)
-    private Set<Reservation> reservation= new HashSet<>();
+    private Set<Reservation> reservation = new HashSet<>();
 
 }

@@ -21,7 +21,7 @@ import java.util.List;
 @RestController
 public class AlerteController {
     @Autowired
-    private  AlerteDao alerteDao;
+    private AlerteDao alerteDao;
 
     @Autowired
     public AlerteController(AlerteDao alerteDao) {
@@ -30,45 +30,47 @@ public class AlerteController {
 
 
     @JsonView(vueAlerte.class)
-    @GetMapping("/alertes")
-    public List<Alerte> listeAlertes(){
+    @GetMapping("/gestionnaire/alertes")
+    public List<Alerte> listeAlertes() {
         return this.alerteDao.findAll();
     }
 
 
     @JsonView(vueAlerte.class)
-    @GetMapping("/alertesNonTraite")
-    public List<Alerte> listeAlertesNonTraite(){
+    @GetMapping("/gestionnaire/alertesNonTraite")
+    public List<Alerte> listeAlertesNonTraite() {
         return this.alerteDao.findAlertesNonTraite();
     }
 
 
     @JsonView(vueAlerte.class)
-    @GetMapping("/alertesReservationNonTraite")
-    public List<Alerte> listeAlertesReservationNonTraite(){
+    @GetMapping("/gestionnaire/alertesReservationNonTraite")
+    public List<Alerte> listeAlertesReservationNonTraite() {
         return this.alerteDao.findAlertesReservationNonTraite();
     }
 
 
     @JsonView(vueAlerte.class)
-    @GetMapping("/alertesReparationNonTraite")
-    public List<Alerte> listeAlertesReparationNonTraite(){
+    @GetMapping("/gestionnaire/alertesReparationNonTraite")
+    public List<Alerte> listeAlertesReparationNonTraite() {
         return this.alerteDao.findAlertesReparationNonTraite();
     }
 
     @JsonView(vueAlerte.class)
-    @GetMapping("/alertesSignalementNonTraite")
-    public List<Alerte> listeAlertesSignalementNonTraite(){
+    @GetMapping("/gestionnaire/alertesSignalementNonTraite")
+    public List<Alerte> listeAlertesSignalementNonTraite() {
         return this.alerteDao.findAlertesSignalementNonTraite();
     }
+
     @JsonView(vueAlerte.class)
-    @GetMapping("/alertesDemandeRetourNonTraite")
+    @GetMapping("/gestionnaire/alertesDemandeRetourNonTraite")
     public List<Alerte> listeAlertesDemandeRetourNonTraite() {
         return this.alerteDao.findAlertesDemandeRetourNonTraite();
     }
+
     @JsonView(vueAlerte.class)
-    @GetMapping("/alertesDemandeProlongationNonTraite")
-    public List<Alerte> listeAlertesDemandeProlongationNonTraite(){
+    @GetMapping("/gestionnaire/alertesDemandeProlongationNonTraite")
+    public List<Alerte> listeAlertesDemandeProlongationNonTraite() {
         return this.alerteDao.findAlertesDemandeProlongationNonTraite();
     }
 

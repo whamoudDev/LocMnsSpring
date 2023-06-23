@@ -16,37 +16,23 @@ import java.util.Optional;
 @Repository
 public interface ReservationDao extends JpaRepository<Reservation, Integer> {
 
-   Optional<Reservation> findByUtilisateurIdUtilisateurAndIdReservationAndDateDebutReservation(
-           Integer idUtilisateur,
-           Integer idReservation,
-           Date date
-   );
+    Optional<Reservation> findByUtilisateurIdUtilisateurAndIdReservationAndDateDebutReservation(
+            Integer idUtilisateur,
+            Integer idReservation,
+            Date date
+    );
 
+    List<Reservation> findByCadreUtilisation(String cadreUtilisation);
 
-  /* void deleteByUtilisateurIdAndReservationIdAndDateDebutReservation(
-           Integer idUtilisateur,
-           Integer idReservation,
-           Date dateDebutReservation
-   );*/
- /* Reservation findByUtilisateurIdAndLocationIdLocation(
-          Integer idUtilisateur,
-          Integer idLocation
-  );*/
+    @Query("SELECT R FROM Reservation R WHERE R.dateFinPrevu < CURRENT_TIMESTAMP AND R.dateRetourReel IS NULL")
+    List<Reservation> listeReservationNonRendu();
 
-   // List<Reservation> findByIdReservation(int idReservation);
-   List<Reservation> findByCadreUtilisation(String cadreUtilisation);
+    @Query("SELECT R FROM Reservation R WHERE R.dateRetourReel IS NULL")
+    List<Reservation> listeReservationEnCours();
 
-   /*@Query("SELECT count(r) FROM Reservation r WHERE r.dateDebutReservation is not null")
-   Integer RechercherNombreDemandesReservation();*/
+    @Query("SELECT R FROM Reservation R WHERE R.utilisateur.idUtilisateur= :idUtilisateur")
+    List<Reservation> findByIdUtilisateur(@Param("idUtilisateur") int idUtilisateur);
 
-   @Query("SELECT R FROM Reservation R WHERE R.dateFinPrevu < CURRENT_TIMESTAMP AND R.dateRetourReel IS NULL")
-   List<Reservation> listeReservationNonRendu();
-
-   @Query("SELECT R FROM Reservation R WHERE R.dateRetourReel IS NULL")
-   List<Reservation> listeReservationEnCours();
-
-   @Query("SELECT R FROM Reservation R WHERE R.utilisateur.idUtilisateur= :idUtilisateur")
-   List<Reservation> findByIdUtilisateur(@Param("idUtilisateur")int idUtilisateur);
-   @Query("SELECT R FROM Reservation R WHERE R.location.idLocation= :idLocation")
-   List<Reservation> findByIdLocation(@Param("idLocation")int idLocation);
+    @Query("SELECT R FROM Reservation R WHERE R.location.idLocation= :idLocation")
+    List<Reservation> findByIdLocation(@Param("idLocation") int idLocation);
 }

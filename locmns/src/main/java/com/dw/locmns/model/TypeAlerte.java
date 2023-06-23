@@ -8,7 +8,7 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-//@Data
+
 @Getter
 @Setter
 @Entity
@@ -20,14 +20,6 @@ public class TypeAlerte {
     @Id
     private Integer idTypeAlerte;
 
-
     private String typeAlerte;
-
-
-    /* @JsonView(vueAlerte.class)
-    @OneToMany(mappedBy = "typeAlerte")
-    private Set<Alerte> listeAlerte= new HashSet<>();
-
-*/
 
 }

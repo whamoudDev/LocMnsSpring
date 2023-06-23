@@ -10,14 +10,13 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-//@Data
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Alerte {
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @JsonView(vueAlerte.class)
     private Integer idAlerte;
@@ -50,8 +49,6 @@ public class Alerte {
     @ManyToOne
     @JsonView({vueUtilisateur.class, vueAlerte.class})
     private TypeAlerte typeAlerte;
-
-
 
 
 }

@@ -16,7 +16,7 @@ import java.util.Map;
 public class JwtUtils {
 
 
-    public  String generateToken(MyUserDetails  userDetails){
+    public String generateToken(MyUserDetails userDetails) {
 
         Map<String, Object> data = new HashMap<>();
         data.put("idUtilisateur", userDetails.getUtilisateur().getIdUtilisateur());
@@ -35,29 +35,28 @@ public class JwtUtils {
                 .setIssuedAt(new Date())
                 .setExpiration(toDate(LocalDateTime.now().plusMinutes(540L)))
 
-                .signWith(SignatureAlgorithm.HS256,"secret" )
+                .signWith(SignatureAlgorithm.HS256, "secret")
                 .compact();
 
     }
+
     private Date toDate(LocalDateTime localDateTime) {
         return Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
 
     }
 
-    public Claims getTokenBody(String token){
+    public Claims getTokenBody(String token) {
         return Jwts.parser()
                 .setSigningKey("secret")
                 .parseClaimsJws(token)
                 .getBody();
     }
 
-    public boolean tokenValide(String token, MyUserDetails userDetails){
+    public boolean tokenValide(String token, MyUserDetails userDetails) {
         Claims claims = getTokenBody(token);
 
         return claims.getSubject().equals(userDetails.getUsername());
     }
-
-
 
 
 }

@@ -9,8 +9,4 @@ import java.util.List;
 @Repository
 public interface TypeAlerteDao extends JpaRepository <TypeAlerte, Integer> {
 
-
-
-    //List<TypeAlerte> getTypeAlerte(String typeAlerte);
-
 }
